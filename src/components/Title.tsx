@@ -6,7 +6,7 @@ export default function Title() {
                     <i className="bi bi-filter-left font-bold text-xl text-white"></i>
                 </button>
             </div>
-            <span className="text-xs font-bold text-white">Weather Forecast</span>
+            <h1 className="text-xs font-bold text-white">Weather Forecast</h1>
         </div>
     )
 }

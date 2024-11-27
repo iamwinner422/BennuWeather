@@ -1,14 +1,29 @@
 import BaseLayout from "../layouts/BaseLayout.tsx";
 import FrameLayout from "../layouts/FrameLayout.tsx";
 import Title from "../components/Title.tsx";
+import moment from "moment";
+
+
+
+
+const todayDate = new Date();
+const formattedDate: string = moment(todayDate).format("ddd, D MMM");
 
 export default function Home() {
     return (
         <BaseLayout>
             <FrameLayout>
                 <Title/>
-                <div className="absolute top-0 left-0 right-0 bottom-0 h-full">
-
+                <div className="py-4">
+                    <div className="flex items-center gap-4 justify-center">
+                        <div>
+                            <i className="wi wi-night-sleet text-swatch_1"></i>
+                        </div>
+                        <div className="flex flex-col">
+                            <h3 className="text-lg font-bold text-white">Today</h3>
+                            <span className="text-xs text-white font-semibold">{formattedDate}</span>
+                        </div>
+                    </div>
                 </div>
             </FrameLayout>
         </BaseLayout>
