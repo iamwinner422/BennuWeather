@@ -1,7 +1,7 @@
 import './App.css'
 import {Route, Routes, BrowserRouter} from "react-router-dom";
-import Home from "@/pages/Home.tsx";
-import NextSevenDays from "@/pages/NextSevenDays.tsx";
+import Home from "./pages/Home.tsx";
+import NextSevenDays from "./pages/NextSevenDays.tsx";
 
 function App() {
 
