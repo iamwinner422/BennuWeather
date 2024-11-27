@@ -5,7 +5,7 @@ interface Props {
 }
 export default function BaseLayout({children}: Props){
     return (
-        <div className="h-screen bg-background">
+        <div className="h-screen bg-background flex items-center justify-center">
             {children}
         </div>
     );
