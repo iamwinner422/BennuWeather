@@ -14,6 +14,7 @@ export default {
             swatch_5: '#aac2df',
             swatch_6: '#3c405c',
             swatch_7: '#986580',
+            background: '#84BBF4',
         }
     },
   },

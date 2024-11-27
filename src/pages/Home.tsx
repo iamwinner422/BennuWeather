@@ -1,7 +1,9 @@
+import BaseLayout from "../layouts/BaseLayout.tsx";
+
 export default function Home() {
     return (
-        <div>
+        <BaseLayout>
             <h1>Home</h1>
-        </div>
+        </BaseLayout>
     )
 }
