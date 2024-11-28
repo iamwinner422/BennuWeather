@@ -6,20 +6,23 @@ import "bootstrap-icons/font/bootstrap-icons.css"
 import "./assets/weather-icons/css/weather-icons.min.css";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {WeatherData} from "./lib/types.ts";
 
 
 const apiURL: string = import.meta.env.VITE_TOMORROW_API_URL;
 const apiKey: string = import.meta.env.VITE_TOMORROW_API_KEY;
 
+
 function App() {
     const [isFetching, setIsFetching] = useState<boolean>(true);
-
+    const [currentWeatherData, setCurrentWeatherData] = useState<WeatherData | null>(null);
 
     const fetchRealTimeWeather = async (lat: number, long: number) => {
         await axios.get(`${apiURL}/realtime?location=${lat},${long}&apikey=${apiKey}`, {
             headers: {"Content-Type": "application/json"}
         }).then((response) => {
             console.log('response', response);
+            setCurrentWeatherData(response.data)
         }).catch((error) => {
             console.log('error', error);
         }).finally(()=>{
@@ -41,7 +44,7 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Home isFetching={isFetching}/>}/>
+                <Route path="/" element={<Home isFetching={isFetching} currentWeatherData={currentWeatherData}/>}/>
                 <Route path="/next-seven-days" element={<NextSevenDays/>}/>
             </Routes>
         </BrowserRouter>
