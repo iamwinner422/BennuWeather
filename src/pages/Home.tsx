@@ -44,17 +44,35 @@ export default function Home({isFetching}: Props) {
                     </div>
                 </div>
                 <div className="mt-2">
-                    <div className="px-8 flex items-baseline justify-between">
+                    <div className="px-10 flex items-baseline justify-between">
                         <button className="text-white font-semibold text-sm flex flex-col items-center gap-y-1">
                             Today
                             <div className="bg-white rounded-full h-1.5 w-1.5"></div>
                         </button>
                         <button className="text-white font-semibold text-sm">Tomorrow</button>
-                        <Link to="/next-seven-days" className="text-swatch_1 font-semibold text-sm flex items-center justify-center">
+                        <Link to="/next-seven-days"
+                            className="text-swatch_1 font-semibold text-sm flex items-center justify-center">
                             Next 7 Days
                             <i className="bi bi-chevron-right text-xs"></i>
                         </Link>
                     </div>
+                    <div className="px-5 mt-6 flex overflow-hidden scrollbar-hide gap-x-2">
+                        {Array.from({length: 10}).map((_, index) => (
+                            <div
+                                key={index}
+                                className="bg-white/20 border border-opacity-30 cursor-pointer border-white rounded-full py-4 h-auto w-[55px] flex flex-col items-center justify-between flex-shrink-0"
+                            >
+                                <span>12AM</span>
+                                <div className="bg-appBackground h-6 w-6 rounded-full flex items-center justify-center">
+                                    <i className="wi wi-sunset text-white"></i>
+                                </div>
+                                <div className="flex">
+                                    29 <span className="text-xs">°C</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
                 </div>
             </FrameLayout>
         </BaseLayout>
