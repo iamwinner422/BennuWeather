@@ -4,8 +4,11 @@ import Title from "../components/Title.tsx";
 import moment from "moment";
 import {WeatherData} from "../lib/types.ts";
 import {Link} from "react-router-dom";
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 const todayDate = new Date();
 const formattedDate: string = moment(todayDate).format("ddd, D MMM");
@@ -56,21 +59,29 @@ export default function Home({isFetching}: Props) {
                             <i className="bi bi-chevron-right text-xs"></i>
                         </Link>
                     </div>
-                    <div className="px-5 mt-8 flex overflow-hidden scrollbar-hide gap-x-2">
-                        {Array.from({length: 5}).map((_, index) => (
-                            <div
-                                key={index}
-                                className="bg-white/20 border border-opacity-30 cursor-pointer border-white rounded-full py-4 h-auto w-[55px] flex flex-col items-center justify-between flex-shrink-0"
-                            >
-                                <span>12AM</span>
-                                <div className="bg-appBackground h-7 w-7 rounded-full flex items-center justify-center">
-                                    <i className="wi wi-sunset text-white"></i>
-                                </div>
-                                <div className="flex">
-                                    29 <span className="text-xs">°C</span>
-                                </div>
-                            </div>
-                        ))}
+                    <div className="w-full">
+                        <Swiper
+                            className="mt-8 mx-4"
+                            slidesPerView={5} // Nombre de slides visibles en même temps
+                            spaceBetween={10} // Espace entre les slides
+                            slidesOffsetBefore={20} // Espace à gauche du slider
+                            slidesOffsetAfter={20} // Espace à droite du slider
+                        >
+                            {Array.from({ length: 10 }).map((_, index) => (
+                                <SwiperSlide
+                                    key={index}
+                                    className="bg-white/20 border border-opacity-30 cursor-pointer border-white rounded-full py-4 h-auto flex flex-col items-center"
+                                >
+                                    <span>12AM</span>
+                                    <div className="bg-appBackground h-7 w-7 rounded-full flex items-center justify-center">
+                                        <i className="wi wi-sunset text-white"></i>
+                                    </div>
+                                    <div className="flex">
+                                        29 <span className="text-xs">°C</span>
+                                    </div>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
                     </div>
 
                 </div>
