@@ -1,6 +1,6 @@
 export default function Title() {
     return (
-        <div className="flex justify-center items-center w-full py-6 relative">
+        <div className="flex justify-center items-center w-full pt-6 relative">
             <div className="absolute left-4">
                 <button>
                     <i className="bi bi-filter-left font-bold text-xl text-white"></i>
