@@ -5,11 +5,15 @@ import moment from "moment";
 
 
 
-
 const todayDate = new Date();
 const formattedDate: string = moment(todayDate).format("ddd, D MMM");
 
-export default function Home() {
+
+interface Props {
+    isFetching: boolean
+}
+
+export default function Home({isFetching}: Props) {
     return (
         <BaseLayout>
             <FrameLayout>
@@ -17,11 +21,12 @@ export default function Home() {
                 <div className="py-4">
                     <div className="flex items-center gap-4 justify-center">
                         <div>
-                            <i className="wi wi-night-sleet text-swatch_1"></i>
+                            {isFetching ? <span className="text-swatch_1 font-bold">--</span> :
+                                <i className="wi wi-night-sleet text-swatch_1"></i>}
                         </div>
                         <div className="flex flex-col">
                             <h3 className="text-lg font-bold text-white">Today</h3>
-                            <span className="text-xs text-white font-semibold">{formattedDate}</span>
+                            <span style={{fontSize: "9px"}} className="text-white">{formattedDate}</span>
                         </div>
                     </div>
                 </div>
