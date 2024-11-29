@@ -67,17 +67,17 @@ export default function Home({isFetching}: Props) {
                             slidesOffsetBefore={20} // Espace à gauche du slider
                             slidesOffsetAfter={20} // Espace à droite du slider
                         >
-                            {Array.from({ length: 10 }).map((_, index) => (
+                            {Array.from({ length: 5 }).map((_, index) => (
                                 <SwiperSlide
                                     key={index}
-                                    className="bg-white/20 border border-opacity-30 cursor-pointer border-white rounded-full py-4 h-auto flex flex-col items-center"
+                                    className="bg-white/20 border border-opacity-30 cursor-pointer border-white rounded-full py-2.5 h-auto flex flex-col justify-center items-center text-center"
                                 >
-                                    <span>12AM</span>
-                                    <div className="bg-appBackground h-7 w-7 rounded-full flex items-center justify-center">
-                                        <i className="wi wi-sunset text-white"></i>
+                                    <span style={{fontSize: "10px"}} className="text-white font-medium uppercase text-center">12AM</span>
+                                    <div className="bg-appBackground/40 mx-auto h-7 w-7 rounded-full flex items-center justify-center my-1">
+                                        <i className="wi wi-sunset text-white text-center"></i>
                                     </div>
-                                    <div className="flex">
-                                        29 <span className="text-xs">°C</span>
+                                    <div style={{fontSize: "12px"}} className="flex items-center justify-center text-white font-bold">
+                                        29 <span style={{fontSize: "9px"}} className="text-xs ml-1 text-center ">°C</span>
                                     </div>
                                 </SwiperSlide>
                             ))}
