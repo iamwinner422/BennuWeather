@@ -13,8 +13,9 @@ import {WeatherData} from "./lib/types.ts";
 
 const apiURL: string = import.meta.env.VITE_TOMORROW_API_URL;
 const apiKey: string = import.meta.env.VITE_TOMORROW_API_KEY;
-const geocodeApiURL: string = import.meta.env.VITE_LOCATION_IQ_API_URL;
-const geocodeApiKey: string = import.meta.env.VITE_LOCATION_IQ_API_KEY;
+const nominatimApiURL: string = import.meta.env.VITE_NOMINATIM_API_URL;
+
+
 
 function App() {
     const [isFetching, setIsFetching] = useState<boolean>(true);
@@ -34,9 +35,11 @@ function App() {
     };
 
     const geocodingReverse = async (lat: number, long: number)=> {
-        await axios.get(`${geocodeApiURL}/reverse?key=${geocodeApiKey}&lat=${lat}&lon=${long}&format=json&`)
+        await axios.get(`${nominatimApiURL}/reverse?format=json&lat=${lat}&lon=${long}&addressdetails=1`)
             .then((response) => {
-                console.log("add", response);
+                const {address} = response.data;
+                const currentPlace = address.city || address.village;
+                console.log("add", currentPlace);
             }).catch((error) => {
                 console.log(error)
             })
