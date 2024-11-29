@@ -55,7 +55,8 @@ function App() {
         const todayData = hourlyData.filter((item) => {
             const itemDate = item.time.split("T")[0]; // Date de l'élément au format YYYY-MM-DD
             const itemHour = parseInt(item.time.split("T")[1].split(":")[0]); // Heure de l'élément
-            return itemDate === today && itemHour >= currentHour && itemHour <= 23; // Aujourd'hui, de l'heure actuelle à 23h
+            return itemDate === today && itemHour >= currentHour && itemHour <= 23 && itemHour % 2 === 0; //Par paire
+            // actuelle à 23h
         });
 
         const tomorrow = new Date(now);
@@ -65,7 +66,7 @@ function App() {
         const tomorrowData = hourlyData.filter((item) => {
             const itemDate = item.time.split("T")[0]; // Date de l'élément
             const itemHour = parseInt(item.time.split("T")[1].split(":")[0]); // Heure de l'élément
-            return itemDate === tomorrowDate && itemHour >= 0 && itemHour <= 23; // Demain de 00h à 23h
+            return itemDate === tomorrowDate && itemHour >= 0 && itemHour <= 23 && itemHour % 2 === 0; //Par paire
         });
 
         return { todayData, tomorrowData };
