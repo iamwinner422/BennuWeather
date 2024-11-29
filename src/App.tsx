@@ -24,6 +24,7 @@ function App() {
     const [tomorrowForecast, setTomorrowForecast] = useState<Array<WeatherData>>([]);
     const [sunrise, setSunrise] = useState<Date>();
     const [sunset, setSunset] = useState<Date>();
+    const [nextFourDaysForecast, setNextFourDaysForecast] = useState<Array<WeatherData>>([]);
 
     const fetchWeather = async (lat: number, long: number) => {
         try {
@@ -31,11 +32,13 @@ function App() {
                 `${apiURL}/forecast?location=${lat},${long}&apikey=${apiKey}`,
                 { headers: { "Content-Type": "application/json" } }
             );
-            const { hourly } = response.data.timelines;
+            const { hourly, daily } = response.data.timelines;
             const { todayData, tomorrowData } = splitHourlyData(hourly);
             setTodayForecast(todayData);
             setTomorrowForecast(tomorrowData);
             setCurrentWeatherData(hourly[0]); // Premier élément comme météo actuelle
+            setNextFourDaysForecast(daily.slice(2, daily.length));
+
         } catch (error) {
             console.error("Erreur lors de la récupération des données météo :", error);
         } finally {
@@ -92,7 +95,10 @@ function App() {
                     todayForecast={todayForecast} tomorrowForecast={tomorrowForecast}
                     />}
                 />
-                <Route path="/next-seven-days" element={<NextSevenDays isNight={isNight}/>}/>
+                <Route path="/next-four-days" element={<NextSevenDays isFetching={isFetching}
+                    nextFourDaysForecast={nextFourDaysForecast}
+                    />}
+                />
             </Routes>
         </BrowserRouter>
     )
