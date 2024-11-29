@@ -1,4 +1,5 @@
 import { WeatherData } from "../lib/types.ts";
+import {roundTemperature} from "../lib/utils.ts";
 
 interface Props {
     formattedDate: string;
@@ -12,7 +13,7 @@ export default function CurrentWeather({ formattedDate, currentPlace, weatherDat
             console.log("Pas de données météo valides :", weatherData);
             return "N/A";
         }
-        return Math.round(weatherData.values.temperature).toString();
+        return roundTemperature(weatherData.values.temperature).toString();
     };
 
     return (
@@ -33,7 +34,7 @@ export default function CurrentWeather({ formattedDate, currentPlace, weatherDat
                 </div>
                 <span className="text-white text-xs">{currentPlace}</span>
                 <span className="text-white text-xs">
-                    Feels Like {Math.round(weatherData?.values?.temperatureApparent as number) || "N/A"} °C
+                    Feels Like {roundTemperature(weatherData?.values?.temperatureApparent as number) || "N/A"} °C
                 </span>
             </div>
         </div>

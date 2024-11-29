@@ -25,4 +25,8 @@ function splitHourlyData(hourlyData: Array<WeatherData>) {
     return { todayData, tomorrowData };
 }
 
-export {splitHourlyData}
+function roundTemperature(temperature: number) {
+    return Math.round(temperature);
+}
+
+export {splitHourlyData, roundTemperature}
