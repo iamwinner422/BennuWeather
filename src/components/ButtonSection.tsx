@@ -20,7 +20,7 @@ export default function ButtonSection({forecastSection, setForecastSection, isNi
                 Tomorrow
                 {forecastSection === "tomorrow" && <div className={`motion-preset-slide-left ${isNight ? 'bg-white' : 'bg-appBackground'} rounded-full h-1.5 w-1.5`}></div>}
             </button>
-            <Link to="/next-seven-days"
+            <Link to="/next-four-days"
                 className="text-swatch_1 font-semibold text-sm flex items-center justify-center">
                 Next 4 Days
                 <i className="bi bi-chevron-right text-xs"></i>
