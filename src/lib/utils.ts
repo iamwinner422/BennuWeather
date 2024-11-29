@@ -1,5 +1,5 @@
 import {WeatherData} from "./types.ts";
-
+import SunCalc from 'suncalc';
 function splitHourlyData(hourlyData: Array<WeatherData>) {
     const now = new Date();
     const today = now.toISOString().split("T")[0]; // Date d'aujourd'hui au format YYYY-MM-DD
@@ -29,61 +29,16 @@ function roundTemperature(temperature: number) {
     return Math.round(temperature);
 }
 
-const weatherCodeMapping = {
-    // Ciel clair
-    1000: {
-        day: 'wi-day-sunny',
-        night: 'wi-night-clear',
-    },
 
-    // Partiellement nuageux
-    1100: {
-        day: 'wi-day-cloudy',
-        night: 'wi-night-alt-cloudy',
-    },
 
-    // Nuageux
-    1001: {
-        day: 'wi-cloudy',
-        night: 'wi-cloudy',
-    },
+function getSunTimes(latitude: number, longitude: number) {
+    const times = SunCalc.getTimes(new Date(), latitude, longitude);
+    return {
+        sunrise: times.sunrise, // Heure du lever
+        sunset: times.sunset   // Heure du coucher
+    };
+}
 
-    // Brume / Brouillard
-    4000: {
-        day: 'wi-fog',
-        night: 'wi-fog',
-    },
-
-    // Pluie légère
-    4001: {
-        day: 'wi-day-rain',
-        night: 'wi-night-alt-rain',
-    },
-
-    // Pluie modérée
-    4200: {
-        day: 'wi-day-rain-mix',
-        night: 'wi-night-alt-rain-mix',
-    },
-
-    // Pluie forte
-    4201: {
-        day: 'wi-day-rain-wind',
-        night: 'wi-night-alt-rain-wind',
-    },
-
-    // Neige légère
-    5001: {
-        day: 'wi-day-snow',
-        night: 'wi-night-alt-snow',
-    },
-
-    // Neige modérée
-    5600: {
-        day: 'wi-day-snow-wind',
-        night: 'wi-night-alt-snow',
-    }
-};
 
 const weatherIcons = {
     1000: { day: "wi-day-sunny", night: "wi-night-clear" },
@@ -99,4 +54,4 @@ function getWeatherIcon(weatherCode: number, isNight:boolean) {
 }
 
 
-export {splitHourlyData, roundTemperature, getWeatherIcon}
+export {splitHourlyData, roundTemperature, getWeatherIcon, getSunTimes}
