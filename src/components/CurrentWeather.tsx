@@ -33,7 +33,7 @@ export default function CurrentWeather({ formattedDate, currentPlace, weatherDat
                 </div>
                 <span className="text-white text-xs">{currentPlace}</span>
                 <span className="text-white text-xs">
-                    Feels Like {weatherData?.values?.temperatureApparent || "N/A"} °C •
+                    Feels Like {Math.round(weatherData?.values?.temperatureApparent as number) || "N/A"} °C
                 </span>
             </div>
         </div>
