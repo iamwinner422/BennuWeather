@@ -36,7 +36,7 @@ export default function Home({currentPlace, currentWeatherData, todayForecast, t
                 <CurrentWeather currentPlace={currentPlace} formattedDate={formattedDate} weatherData={currentWeatherData}/>
                 <div className="">
                     <ButtonSection forecastSection={forecastSection} setForecastSection={setForecastSection}/>
-                    {forecastSection === "today" ? <TodayForecast/> : <TomorrowForecast/>}
+                    {forecastSection === "today" ? <TodayForecast forecast={todayForecast}/> : <TomorrowForecast forecast={tomorrowForecast}/>}
                 </div>
                 <div className="px-6 mt-5 flex flex-col gap-y-4">
                     <h4 className="font-bold text-white">Chance of rain</h4>

@@ -1,7 +1,12 @@
 import {Swiper, SwiperSlide} from "swiper/react";
 import ForecastDetail from "./ForecastDetail.tsx";
+import {WeatherData} from "../lib/types.ts";
 
-export default function TodayForecast(){
+interface Props {
+    forecast: Array<WeatherData>;
+}
+
+export default function TodayForecast({forecast}: Props){
     return (
         <div className="w-full motion-preset-slide-left">
             <Swiper
@@ -11,7 +16,7 @@ export default function TodayForecast(){
                 slidesOffsetBefore={20} // Espace à gauche du slider
                 slidesOffsetAfter={20} // Espace à droite du slider
             >
-                {Array.from({length: 10}).map((_, index) => (
+                {forecast.map((data, index) => (
                     <SwiperSlide
                         key={index}
                         className="bg-white/20 hover:bg-white border border-opacity-30 cursor-pointer
@@ -20,7 +25,7 @@ export default function TodayForecast(){
                                     group hover:shadow-2xl shadow-white
                                     "
                     >
-                        <ForecastDetail/>
+                        <ForecastDetail data={data}/>
                     </SwiperSlide>
                 ))}
             </Swiper>

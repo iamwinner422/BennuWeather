@@ -1,4 +1,9 @@
-export default function ForecastDetail() {
+import {WeatherData} from "../lib/types.ts";
+
+interface Props {
+    data: WeatherData
+}
+export default function ForecastDetail({data}: Props) {
     return (
         <>
             <span style={{fontSize: "10px"}} className="text-white group-hover:text-swatch_2 font-bold uppercase text-center">12AM</span>
