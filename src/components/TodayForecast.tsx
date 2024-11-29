@@ -11,7 +11,7 @@ export default function TodayForecast({forecast, isNight}: Props){
     return (
         <div className="w-full motion-preset-slide-left">
             <Swiper
-                style={{paddingTop: '25px', paddingBottom: '25px'}}
+                style={{paddingTop: '25px', paddingBottom: '20px'}}
                 slidesPerView={5} // Nombre de slides visibles en même temps
                 spaceBetween={10} // Espace entre les slides
                 slidesOffsetBefore={20} // Espace à gauche du slider
