@@ -1,14 +1,18 @@
-import {WeatherData} from "../lib/types.ts";
+import { WeatherData } from "../lib/types.ts";
 
 interface Props {
     formattedDate: string;
     currentPlace: string;
-    weatherData: WeatherData | null;
+    weatherData?: WeatherData | undefined;
 }
 
-export default function CurrentWeather({formattedDate, currentPlace, weatherData}: Props){
+export default function CurrentWeather({ formattedDate, currentPlace, weatherData }: Props) {
     const formattedTemperature = (): string => {
-        return weatherData?.values?.temperature ? Math.round(weatherData?.values?.temperature).toString() : "28";
+        if (!weatherData || !weatherData.values || !weatherData.values.temperature) {
+            console.log("Pas de données météo valides :", weatherData);
+            return "N/A";
+        }
+        return Math.round(weatherData.values.temperature).toString();
     };
 
     return (
@@ -19,7 +23,7 @@ export default function CurrentWeather({formattedDate, currentPlace, weatherData
                 </div>
                 <div className="flex flex-col">
                     <h3 className="text-lg font-bold text-white">Today</h3>
-                    <span style={{fontSize: "9px"}} className="text-white">{formattedDate}</span>
+                    <span style={{ fontSize: "9px" }} className="text-white">{formattedDate}</span>
                 </div>
             </div>
             <div className="flex flex-col gap-y-3 items-center justify-center">
@@ -28,8 +32,10 @@ export default function CurrentWeather({formattedDate, currentPlace, weatherData
                     <span className="text-white text-lg">°C</span>
                 </div>
                 <span className="text-white text-xs">{currentPlace}</span>
-                <span className="text-white text-xs">Feels Like {weatherData?.values?.temperatureApparent || "N/A"} • </span>
+                <span className="text-white text-xs">
+                    Feels Like {weatherData?.values?.temperatureApparent || "N/A"} •
+                </span>
             </div>
         </div>
-    )
+    );
 }

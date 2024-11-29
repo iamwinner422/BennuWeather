@@ -17,14 +17,14 @@ const nominatimApiURL: string = import.meta.env.VITE_NOMINATIM_API_URL;
 function App() {
     const [isFetching, setIsFetching] = useState<boolean>(true);
     const [currentPlace, setCurrentPlace] = useState<string>("Lomé");
-    const [currentWeatherData, setCurrentWeatherData] = useState<WeatherData | null>(null);
+    const [currentWeatherData, setCurrentWeatherData] = useState<WeatherData | undefined>(undefined);
 
     const fetchRealTimeWeather = async (lat: number, long: number) => {
         await axios.get(`${apiURL}/realtime?location=${lat},${long}&apikey=${apiKey}`, {
             headers: {"Content-Type": "application/json"}
         }).then((response) => {
             console.log('response', response);
-            setCurrentWeatherData(response.data)
+            setCurrentWeatherData(response.data.data)
         }).catch((error) => {
             console.log('error', error);
         }).finally(()=>{
