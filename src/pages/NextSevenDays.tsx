@@ -42,16 +42,18 @@ export default function NextSevenDays({isFetching, isNight = false, nextFourDays
                             <div className="w-full flex space-x-10">
                                 <div className="flex w-1/2">
                                     <div className="w-full flex justify-between items-center">
-                                        <span style={{fontSize: "12px"}}
-                                            className="font-bold text-appBackground">Wind</span>
-                                        <span style={{fontSize: "10px"}} className="text-gray-400">12 m/h</span>
+                                        <span style={{fontSize: "12px"}} className="font-bold text-appBackground">Wind</span>
+                                        <span style={{fontSize: "10px"}} className="text-gray-400">
+                                            {isFetching ? '--' : firstData?.values.windSpeedAvg} m/h
+                                        </span>
                                     </div>
                                 </div>
                                 <div className="flex w-1/2">
                                     <div className="w-full flex justify-between items-center">
-                                        <span style={{fontSize: "12px"}}
-                                            className="font-bold text-appBackground">Humidity</span>
-                                        <span style={{fontSize: "10px"}} className="text-gray-400">55%</span>
+                                        <span style={{fontSize: "12px"}} className="font-bold text-appBackground">Humidity</span>
+                                        <span style={{fontSize: "10px"}} className="text-gray-400">
+                                            {isFetching ? '--' : firstData?.values.humidityAvg} %
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -60,14 +62,18 @@ export default function NextSevenDays({isFetching, isNight = false, nextFourDays
                                     <div className="w-full flex justify-between items-center">
                                         <span style={{fontSize: "12px"}}
                                             className="font-bold text-appBackground">Visibility</span>
-                                        <span style={{fontSize: "10px"}} className="text-gray-400">25 km</span>
+                                        <span style={{fontSize: "10px"}} className="text-gray-400">
+                                            {isFetching ? '--' : firstData?.values.visibilityAvg} km
+                                        </span>
                                     </div>
                                 </div>
                                 <div className="flex w-1/2">
                                     <div className="w-full flex justify-between items-center">
                                         <span style={{fontSize: "12px"}}
                                             className="font-bold text-appBackground">UV</span>
-                                        <span style={{fontSize: "10px"}} className="text-gray-400">1</span>
+                                        <span style={{fontSize: "10px"}} className="text-gray-400">
+                                            {isFetching ? '--' : firstData?.values.uvIndexAvg}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
