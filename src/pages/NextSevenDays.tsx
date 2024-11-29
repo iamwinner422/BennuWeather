@@ -5,9 +5,13 @@ import {Link} from "react-router-dom";
 
 
 interface Props {
+    isFetching: boolean;
     isNight: boolean;
+    sunrise?: Date | undefined;
+    sunset?: Date | undefined;
 }
-export default function NextSevenDays({isNight = false}: Props){
+export default function NextSevenDays({isFetching, isNight = false, sunrise, sunset}: Props){
+    console.log('isi', sunrise, sunset)
     return(
         <BaseLayout>
             <FrameLayout isNight={isNight}>
