@@ -3,7 +3,9 @@ import FrameLayout from "../layouts/FrameLayout.tsx";
 import Title from "../components/Title.tsx";
 import moment from "moment";
 import {WeatherData} from "../lib/types.ts";
+// @ts-expect-error
 import 'swiper/css';
+// @ts-expect-error
 import 'swiper/css/pagination';
 import CurrentWeather from "../components/CurrentWeather.tsx";
 import ButtonSection from "../components/ButtonSection.tsx";
@@ -27,13 +29,10 @@ export default function Home({isFetching}: Props) {
         <BaseLayout>
             <FrameLayout>
                 <Title/>
-                <CurrentWeather isFetching={isFetching} formattedDate={formattedDate}/>
+                <CurrentWeather formattedDate={formattedDate}/>
                 <div className="">
-                    <ButtonSection/>
+                    <ButtonSection forecastSection={forecastSection} setForecastSection={setForecastSection}/>
                     {forecastSection === "today" ? <TodayForecast/> : <TomorrowForecast/>}
-
-
-
                 </div>
                 <div className="px-6 mt-5 flex flex-col gap-y-4">
                     <h4 className="font-bold text-white">Chance of rain</h4>

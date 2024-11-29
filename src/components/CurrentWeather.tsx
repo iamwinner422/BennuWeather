@@ -1,10 +1,9 @@
 
 interface Props {
-    isFetching: boolean;
     formattedDate: string
 }
 
-export default function CurrentWeather({isFetching, formattedDate}: Props){
+export default function CurrentWeather({formattedDate}: Props){
     return (
         <div className="my-5">
             <div className="flex items-center gap-4 justify-center">
