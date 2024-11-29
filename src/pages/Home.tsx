@@ -24,7 +24,7 @@ export default function Home({isFetching}: Props) {
         <BaseLayout>
             <FrameLayout>
                 <Title/>
-                <div className="my-6">
+                <div className="my-5">
                     <div className="flex items-center gap-4 justify-center">
                         <div>
                             {isFetching ?
@@ -61,7 +61,7 @@ export default function Home({isFetching}: Props) {
                     </div>
                     <div className="w-full">
                         <Swiper
-                            style={{paddingTop: '35px'}}
+                            style={{paddingTop: '20px'}}
                             slidesPerView={5} // Nombre de slides visibles en même temps
                             spaceBetween={10} // Espace entre les slides
                             slidesOffsetBefore={20} // Espace à gauche du slider
@@ -72,7 +72,7 @@ export default function Home({isFetching}: Props) {
                                     key={index}
                                     className="bg-white/20 hover:bg-white border border-opacity-30 cursor-pointer
                                     border-white rounded-full py-2.5 h-auto flex flex-col justify-center items-center text-center
-                                    transition-all delay-0 duration-700 ease-out [translate:0] hover:shadow-md hover:[translate:0_-22px]
+                                    transition-all delay-0 duration-700 ease-out [translate:0] hover:shadow-md hover:[translate:0_-18px]
                                     group
                                     "
                                 >
@@ -88,6 +88,17 @@ export default function Home({isFetching}: Props) {
                         </Swiper>
                     </div>
 
+                </div>
+                <div className="px-6 mt-5 flex flex-col gap-y-4">
+                    <h4 className="font-bold text-white">Chance of rain</h4>
+                    <div className="flex w-full">
+                        <div className="w-1/6 flex flex-col text-white font-medium text-xs gap-y-3">
+                            <span>sunny</span>
+                            <span>rainy</span>
+                            <span>heavy rain</span>
+                        </div>
+                        <div className="w-auto"></div>
+                    </div>
                 </div>
             </FrameLayout>
         </BaseLayout>
