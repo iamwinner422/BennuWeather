@@ -7,11 +7,14 @@ import "./assets/weather-icons/css/weather-icons.min.css";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {WeatherData} from "./lib/types.ts";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 
 
 const apiURL: string = import.meta.env.VITE_TOMORROW_API_URL;
 const apiKey: string = import.meta.env.VITE_TOMORROW_API_KEY;
-
+const geocodeApiURL: string = import.meta.env.VITE_LOCATION_IQ_API_URL;
+const geocodeApiKey: string = import.meta.env.VITE_LOCATION_IQ_API_KEY;
 
 function App() {
     const [isFetching, setIsFetching] = useState<boolean>(true);
@@ -30,6 +33,15 @@ function App() {
         })
     };
 
+    const geocodingReverse = async (lat: number, long: number)=> {
+        await axios.get(`${geocodeApiURL}/reverse?key=${geocodeApiKey}&lat=${lat}&lon=${long}&format=json&`)
+            .then((response) => {
+                console.log("add", response);
+            }).catch((error) => {
+                console.log(error)
+            })
+    }
+
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
             (position) => {
@@ -37,6 +49,7 @@ function App() {
                 // Fetch weather data using latitude and longitude
                 console.log(latitude, longitude)
                 fetchRealTimeWeather(latitude, longitude)
+                geocodingReverse(latitude, longitude);
             },
             (error) => console.error("Error getting location:", error)
         );
