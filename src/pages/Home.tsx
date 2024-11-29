@@ -24,7 +24,7 @@ interface Props {
     currentPlace: string;
 }
 
-export default function Home({isFetching, currentPlace, currentWeatherData}: Props) {
+export default function Home({currentPlace, currentWeatherData}: Props) {
     const [forecastSection, setForecastSection] = useState<"today" | "tomorrow">("today");
     return (
         <BaseLayout>
