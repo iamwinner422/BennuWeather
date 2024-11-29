@@ -26,7 +26,7 @@ export default function TomorrowForecast({forecast, isNight}: Props){
                                     group hover:shadow-2xl shadow-white
                                     `}
                     >
-                        <ForecastDetail data={data}/>
+                        <ForecastDetail data={data} isNight={isNight}/>
                     </SwiperSlide>
                 ))}
             </Swiper>

@@ -28,7 +28,7 @@ export default function CurrentWeather({ formattedDate, currentPlace, weatherDat
         <div className="my-5">
             <div className="flex items-center gap-4 justify-center">
                 <div>
-                    {weatherData?.values.weatherCode && <WeatherIcon weatherCode={weatherData?.values.weatherCode} isNight={isNight}/>}
+                    {weatherData?.values.weatherCode && <WeatherIcon weatherCode={weatherData?.values.weatherCode} isNight={isNight} classes="text-swatch_1"/>}
                 </div>
                 <div className="flex flex-col">
                     <h3 className={`text-lg font-bold ${isNight ? 'text-white' : 'text-appBackground'}`}>Today</h3>
