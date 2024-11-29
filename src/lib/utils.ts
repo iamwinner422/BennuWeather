@@ -34,8 +34,8 @@ function roundTemperature(temperature: number) {
 function getSunTimes(latitude: number, longitude: number) {
     const times = SunCalc.getTimes(new Date(), latitude, longitude);
     return {
-        sunrise: times.sunrise, // Heure du lever
-        sunset: times.sunset   // Heure du coucher
+        sunrise_: times.sunrise, // Heure du lever
+        sunset_: times.sunset   // Heure du coucher
     };
 }
 

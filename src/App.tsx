@@ -7,7 +7,7 @@ import "./assets/weather-icons/css/weather-icons.min.css";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {WeatherData} from "./lib/types.ts";
-import {splitHourlyData} from "./lib/utils.ts";
+import {getSunTimes, splitHourlyData} from "./lib/utils.ts";
 
 
 const apiURL: string = import.meta.env.VITE_TOMORROW_API_URL;
@@ -22,6 +22,8 @@ function App() {
     const [currentWeatherData, setCurrentWeatherData] = useState<WeatherData | undefined>(undefined);
     const [todayForecast, setTodayForecast] = useState<Array<WeatherData>>([]);
     const [tomorrowForecast, setTomorrowForecast] = useState<Array<WeatherData>>([]);
+    const [sunrise, setSunrise] = useState<Date>();
+    const [sunset, setSunset] = useState<Date>();
 
     const fetchWeather = async (lat: number, long: number) => {
         try {
@@ -65,6 +67,12 @@ function App() {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
+
+                const { sunrise_, sunset_ } = getSunTimes(latitude, longitude);
+                const now = new Date();
+                setIsNight(now < sunrise_ || now > sunset_);
+                setSunset(sunset_);
+                setSunrise(sunrise_);
                 fetchWeather(latitude, longitude);
                 geocodingReverse(latitude, longitude);
             },
@@ -79,8 +87,8 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Home isFetching={isFetching}
-                    currentWeatherData={currentWeatherData} currentPlace={currentPlace}
+                <Route path="/" element={<Home isFetching={isFetching} isNight={isNight} sunrise={sunrise}
+                    currentWeatherData={currentWeatherData} currentPlace={currentPlace} sunset={sunset}
                     todayForecast={todayForecast} tomorrowForecast={tomorrowForecast}
                     />}
                 />

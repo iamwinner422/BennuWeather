@@ -24,6 +24,9 @@ interface Props {
     currentPlace: string;
     todayForecast: Array<WeatherData>;
     tomorrowForecast: Array<WeatherData>;
+    isNight: boolean;
+    sunrise?: Date;
+    sunset?: Date;
 
 }
 
