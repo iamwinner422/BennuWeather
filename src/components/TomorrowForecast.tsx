@@ -3,8 +3,8 @@ import ForecastDetail from "./ForecastDetail.tsx";
 
 export default function TomorrowForecast(){
     return (
-        <div className="w-full">
-            <Swiper className="motion-preset-slide-right"
+        <div className="w-full motion-preset-slide-right">
+            <Swiper
                 style={{paddingTop: '25px'}}
                 slidesPerView={5} // Nombre de slides visibles en même temps
                 spaceBetween={10} // Espace entre les slides
