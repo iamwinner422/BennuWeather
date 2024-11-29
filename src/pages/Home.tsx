@@ -91,7 +91,7 @@ export default function Home({isFetching, currentPlace, currentWeatherData, toda
                 <div className="">
                     <ButtonSection forecastSection={forecastSection} setForecastSection={setForecastSection} isNight={isNight}/>
                     {isFetching && (<div className="py-6 flex items-center justify-center">
-                        <span className="text-white text-center">Loading...</span>
+                        <span className="${isNight ? 'text-white': 'text-appBackground' text-center">Loading...</span>
                     </div>)}
 
                     {forecastSection === "today" ? <TodayForecast forecast={todayForecast} isNight={isNight}/> : <TomorrowForecast forecast={tomorrowForecast} isNight={isNight}/>}

@@ -48,14 +48,21 @@ interface WeatherIcon {
 const weatherIcons: Record<number, WeatherIcon> = {
     1000: { day: "wi-day-sunny", night: "wi-night-clear" },
     1100: { day: "wi-day-cloudy", night: "wi-night-alt-cloudy" },
-    1101: { day: "wi-cloud", night: "wi-cloud" },
-    4000: { day: "wi-day-rain", night: "wi-night-alt-rain" },
+    1001: { day: "wi-cloud", night: "wi-cloud" },
+    1102: { day: "wi-day-cloudy-high", night: "wi-night-cloudy-high"},
+    4000: { day: 'wi-fog', night: 'wi-fog' },
+    4001: { day: "wi-day-rain", night: "wi-night-alt-rain" },
+    4200: { day: 'wi-day-rain-mix', night: 'wi-night-alt-rain-mix'},
+    4201: { day: 'wi-day-rain-wind', night: 'wi-night-alt-rain-wind'},
+    5001: { day: 'wi-day-snow', night: 'wi-night-alt-snow'},
+    5600: { day: 'wi-day-snow-wind', night: 'wi-night-alt-snow'},
     8000: { day: "wi-day-thunderstorm", night: "wi-night-alt-thunderstorm" },
 };
 
 function getWeatherIcon(weatherCode: number, isNight:boolean) {
     const icon: WeatherIcon = weatherIcons[weatherCode];
-    return isNight ? icon.night : icon.day;
+    console.log("codeè", weatherCode)
+    return isNight ? icon?.night : icon?.day;
 }
 
 
