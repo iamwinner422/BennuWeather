@@ -16,6 +16,7 @@ const nominatimApiURL: string = import.meta.env.VITE_NOMINATIM_API_URL;
 
 
 function App() {
+    const [isNight, setIsNight] = useState<boolean>(false);
     const [isFetching, setIsFetching] = useState<boolean>(true);
     const [currentPlace, setCurrentPlace] = useState<string>("--");
     const [currentWeatherData, setCurrentWeatherData] = useState<WeatherData | undefined>(undefined);
