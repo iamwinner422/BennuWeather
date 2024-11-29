@@ -37,8 +37,8 @@ function App() {
             setTodayForecast(todayData);
             setTomorrowForecast(tomorrowData);
             setCurrentWeatherData(hourly[0]); // Premier élément comme météo actuelle
-            //setNextFourDaysForecast()
-            console.log("daily", daily.split(1, daily.length))
+            setNextFourDaysForecast(daily.slice(2, daily.length));
+
         } catch (error) {
             console.error("Erreur lors de la récupération des données météo :", error);
         } finally {
@@ -95,8 +95,8 @@ function App() {
                     todayForecast={todayForecast} tomorrowForecast={tomorrowForecast}
                     />}
                 />
-                <Route path="/next-four-days" element={<NextSevenDays isNight={isNight} sunrise={sunrise}
-                    sunset={sunset} isFetching={isFetching}
+                <Route path="/next-four-days" element={<NextSevenDays isNight={isNight} isFetching={isFetching}
+                    nextFourDaysForecast={nextFourDaysForecast}
                     />}
                 />
             </Routes>

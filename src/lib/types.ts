@@ -21,5 +21,8 @@ export interface WeatherData {
         windDirection: number;
         windGust: number;
         windSpeed: number;
+        temperatureAvg?: number | undefined;
+        temperatureApparentAvg?: number | undefined;
+        weatherCodeMax?: number | undefined;
     }
 }

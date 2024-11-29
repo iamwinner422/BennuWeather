@@ -2,16 +2,20 @@ import Title from "../components/Title.tsx";
 import FrameLayout from "../layouts/FrameLayout.tsx";
 import BaseLayout from "../layouts/BaseLayout.tsx";
 import {Link} from "react-router-dom";
+import {WeatherData} from "../lib/types.ts";
+import moment from "moment";
+import {roundTemperature} from "../lib/utils.ts";
+import WeatherIcon from "../components/WeatherIcon.tsx";
 
 
 interface Props {
     isFetching: boolean;
     isNight: boolean;
-    sunrise?: Date | undefined;
-    sunset?: Date | undefined;
+    nextFourDaysForecast: WeatherData[];
 }
-export default function NextSevenDays({isFetching, isNight = false, sunrise, sunset}: Props){
-    console.log('isi', sunrise, sunset)
+export default function NextSevenDays({isFetching, isNight = false, nextFourDaysForecast}: Props){
+    console.log('isi', nextFourDaysForecast[0])
+    const firstData: WeatherData = nextFourDaysForecast[0];
     return(
         <BaseLayout>
             <FrameLayout isNight={isNight}>
@@ -24,12 +28,14 @@ export default function NextSevenDays({isFetching, isNight = false, sunrise, sun
                     <div className="bg-white shadow-xl rounded px-4 py-6 flex flex-col gap-y-5">
                         <div className="flex justify-between items-center">
                             <div className="flex gap-x-4 items-center">
-                                <h5 className="text-sm text-appBackground font-bold">Monday</h5>
-                                <i className="wi wi-cloud text-swatch_1"></i>
+                                <h5 className="text-sm text-appBackground font-bold">{isFetching ? "--" : moment(firstData?.time).format('dddd')}</h5>
+                                {!isFetching && firstData?.values.weatherCodeMax && <WeatherIcon isNight={isNight} weatherCode={firstData.values.weatherCodeMax} classes="text-swatch_1" />}
                             </div>
                             <div className="flex gap-x-2 items-center">
-                                <span className="text-appBackground text-sm font-bold">26°C</span>
-                                <span className="text-gray-400 text-xs">19°C</span>
+                                <span className="text-appBackground text-sm font-bold">
+                                    {isFetching ? "--" : roundTemperature(firstData?.values.temperatureAvg as number)}°C
+                                </span>
+                                <span className="text-gray-400 text-xs">{isFetching ? "--" : roundTemperature(firstData?.values.temperatureApparentAvg as number)}°C</span>
                             </div>
                         </div>
                         <div className="flex flex-col gap-y-2">
