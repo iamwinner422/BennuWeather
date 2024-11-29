@@ -7,8 +7,8 @@ import "./assets/weather-icons/css/weather-icons.min.css";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {WeatherData} from "./lib/types.ts";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
+
+
 
 
 const apiURL: string = import.meta.env.VITE_TOMORROW_API_URL;
