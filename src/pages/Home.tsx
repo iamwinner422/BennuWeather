@@ -3,12 +3,14 @@ import FrameLayout from "../layouts/FrameLayout.tsx";
 import Title from "../components/Title.tsx";
 import moment from "moment";
 import {WeatherData} from "../lib/types.ts";
-import {Link} from "react-router-dom";
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-
 import 'swiper/css';
 import 'swiper/css/pagination';
+import CurrentWeather from "../components/CurrentWeather.tsx";
+import ButtonSection from "../components/ButtonSection.tsx";
+import TodayForecast from "../components/TodayForecast.tsx";
+import {useState} from "react";
+import TomorrowForecast from "../components/TomorrowForecast.tsx";
+
 
 const todayDate = new Date();
 const formattedDate: string = moment(todayDate).format("ddd, D MMM");
@@ -20,73 +22,17 @@ interface Props {
 }
 
 export default function Home({isFetching}: Props) {
+    const [forecastSection, setForecastSection] = useState<"today" | "tomorrow">("today");
     return (
         <BaseLayout>
             <FrameLayout>
                 <Title/>
-                <div className="my-5">
-                    <div className="flex items-center gap-4 justify-center">
-                        <div>
-                            {isFetching ?
-                                <span className="text-swatch_1 font-bold">--</span> :
-                                <i className="wi wi-night-sleet text-swatch_1"></i>
-                            }
-                        </div>
-                        <div className="flex flex-col">
-                            <h3 className="text-lg font-bold text-white">Today</h3>
-                            <span style={{fontSize: "9px"}} className="text-white">{formattedDate}</span>
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-y-3 items-center justify-center">
-                        <div className="flex mt-5">
-                            <h2 className="text-white text-7xl">28</h2>
-                            <span className="text-white text-lg">°C</span>
-                        </div>
-                        <span className="text-white text-xs">Ville</span>
-                        <span className="text-white text-xs">Fill Like ° Sunset</span>
-                    </div>
-                </div>
+                <CurrentWeather isFetching={isFetching} formattedDate={formattedDate}/>
                 <div className="">
-                    <div className="px-10 flex items-baseline justify-between">
-                        <button className="text-white font-semibold text-sm flex flex-col items-center gap-y-1">
-                            Today
-                            <div className="bg-white rounded-full h-1.5 w-1.5"></div>
-                        </button>
-                        <button className="text-white font-semibold text-sm">Tomorrow</button>
-                        <Link to="/next-seven-days"
-                            className="text-swatch_1 font-semibold text-sm flex items-center justify-center">
-                            Next 7 Days
-                            <i className="bi bi-chevron-right text-xs"></i>
-                        </Link>
-                    </div>
-                    <div className="w-full">
-                        <Swiper
-                            style={{paddingTop: '20px'}}
-                            slidesPerView={5} // Nombre de slides visibles en même temps
-                            spaceBetween={10} // Espace entre les slides
-                            slidesOffsetBefore={20} // Espace à gauche du slider
-                            slidesOffsetAfter={20} // Espace à droite du slider
-                        >
-                            {Array.from({ length: 5 }).map((_, index) => (
-                                <SwiperSlide
-                                    key={index}
-                                    className="bg-white/20 hover:bg-white border border-opacity-30 cursor-pointer
-                                    border-white rounded-full py-2.5 h-auto flex flex-col justify-center items-center text-center
-                                    transition-all delay-0 duration-700 ease-out [translate:0] hover:shadow-md hover:[translate:0_-18px]
-                                    group
-                                    "
-                                >
-                                    <span style={{fontSize: "10px"}} className="text-white group-hover:text-swatch_2 font-bold uppercase text-center">12AM</span>
-                                    <div className="bg-appBackground/40 group-hover:bg-swatch_3 mx-auto h-7 w-7 rounded-full flex items-center justify-center my-1">
-                                        <i className="wi wi-sunset text-white group-hover:text-swatch_1 text-center"></i>
-                                    </div>
-                                    <div style={{fontSize: "12px"}} className="flex items-center justify-center group-hover:text-swatch_2 text-white font-bold">
-                                        29 <span style={{fontSize: "9px"}} className="text-xs ml-1 text-center ">°C</span>
-                                    </div>
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
-                    </div>
+                    <ButtonSection/>
+                    {forecastSection === "today" ? <TodayForecast/> : <TomorrowForecast/>}
+
+
 
                 </div>
                 <div className="px-6 mt-5 flex flex-col gap-y-4">
