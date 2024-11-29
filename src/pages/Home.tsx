@@ -12,10 +12,10 @@ import ButtonSection from "../components/ButtonSection.tsx";
 import TodayForecast from "../components/TodayForecast.tsx";
 import {useState} from "react";
 import TomorrowForecast from "../components/TomorrowForecast.tsx";
-import { Bar } from 'react-chartjs-2';
 import {Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, TooltipItem, CoreChartOptions} from 'chart.js';
 // @ts-ignore
 import {_DeepPartialObject} from "chart.js/dist/types/utils";
+import ChanceOfRain from "../components/ChanceOfRain.tsx";
 
 
 const todayDate = new Date();
@@ -96,12 +96,7 @@ export default function Home({isFetching, currentPlace, currentWeatherData, toda
 
                     {forecastSection === "today" ? <TodayForecast forecast={todayForecast} isNight={isNight}/> : <TomorrowForecast forecast={tomorrowForecast} isNight={isNight}/>}
                 </div>
-                <div className="px-6 flex flex-col gap-y-4">
-                    <h4 className="font-bold ${isNight ? 'text-white' : 'text-appBackground'}">Chance of rain</h4>
-                    <div className="flex w-full">
-                        <Bar data={data} options={options} />;
-                    </div>
-                </div>
+                <ChanceOfRain data={data} options={options}/>
             </FrameLayout>
         </BaseLayout>
     )
