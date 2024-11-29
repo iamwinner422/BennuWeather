@@ -15,7 +15,7 @@ export default function ButtonSection({forecastSection, setForecastSection}: Pro
                 Today
                 {forecastSection === "today" && <div className="bg-white rounded-full h-1.5 w-1.5"></div>}
             </button>
-            <button className="text-white font-semibold text-sm f   lex flex-col items-center gap-y-1">
+            <button className="text-white font-semibold text-sm flex flex-col items-center gap-y-1">
                 Tomorrow
                 {forecastSection === "tomorrow" && <div className="bg-white rounded-full h-1.5 w-1.5"></div>}
             </button>
