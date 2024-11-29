@@ -4,14 +4,14 @@ import ForecastDetail from "./ForecastDetail.tsx";
 export default function TodayForecast(){
     return (
         <div className="w-full">
-            <Swiper
+            <Swiper className="motion-preset-slide-left"
                 style={{paddingTop: '25px'}}
                 slidesPerView={5} // Nombre de slides visibles en même temps
                 spaceBetween={10} // Espace entre les slides
                 slidesOffsetBefore={20} // Espace à gauche du slider
                 slidesOffsetAfter={20} // Espace à droite du slider
             >
-                {Array.from({length: 5}).map((_, index) => (
+                {Array.from({length: 10}).map((_, index) => (
                     <SwiperSlide
                         key={index}
                         className="bg-white/20 hover:bg-white border border-opacity-30 cursor-pointer

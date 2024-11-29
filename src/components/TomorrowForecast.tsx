@@ -4,7 +4,7 @@ import ForecastDetail from "./ForecastDetail.tsx";
 export default function TomorrowForecast(){
     return (
         <div className="w-full">
-            <Swiper
+            <Swiper className="motion-preset-slide-right"
                 style={{paddingTop: '25px'}}
                 slidesPerView={5} // Nombre de slides visibles en même temps
                 spaceBetween={10} // Espace entre les slides

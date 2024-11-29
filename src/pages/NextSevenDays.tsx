@@ -1,7 +1,13 @@
+import Title from "../components/Title.tsx";
+import FrameLayout from "../layouts/FrameLayout.tsx";
+import BaseLayout from "../layouts/BaseLayout.tsx";
+
 export default function NextSevenDays(){
     return(
-        <div>
-            <h1>Next Seven Days</h1>
-        </div>
+        <BaseLayout>
+            <FrameLayout>
+                <Title/>
+            </FrameLayout>
+        </BaseLayout>
     )
 }
