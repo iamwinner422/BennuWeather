@@ -5,7 +5,7 @@ export default function TomorrowForecast(){
     return (
         <div className="w-full">
             <Swiper
-                style={{paddingTop: '20px'}}
+                style={{paddingTop: '25px'}}
                 slidesPerView={5} // Nombre de slides visibles en même temps
                 spaceBetween={10} // Espace entre les slides
                 slidesOffsetBefore={20} // Espace à gauche du slider

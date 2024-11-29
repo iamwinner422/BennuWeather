@@ -24,13 +24,13 @@ interface Props {
     currentPlace: string;
 }
 
-export default function Home({isFetching, currentPlace}: Props) {
+export default function Home({isFetching, currentPlace, currentWeatherData}: Props) {
     const [forecastSection, setForecastSection] = useState<"today" | "tomorrow">("today");
     return (
         <BaseLayout>
             <FrameLayout>
                 <Title/>
-                <CurrentWeather currentPlace={currentPlace} formattedDate={formattedDate}/>
+                <CurrentWeather currentPlace={currentPlace} formattedDate={formattedDate} weatherData={currentWeatherData}/>
                 <div className="">
                     <ButtonSection forecastSection={forecastSection} setForecastSection={setForecastSection}/>
                     {forecastSection === "today" ? <TodayForecast/> : <TomorrowForecast/>}
