@@ -61,7 +61,6 @@ const weatherIcons: Record<number, WeatherIcon> = {
 
 function getWeatherIcon(weatherCode: number, isNight:boolean) {
     const icon: WeatherIcon = weatherIcons[weatherCode];
-    console.log("codeè", weatherCode)
     return isNight ? icon?.night : icon?.day;
 }
 
