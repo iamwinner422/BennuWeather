@@ -12,40 +12,91 @@ import ButtonSection from "../components/ButtonSection.tsx";
 import TodayForecast from "../components/TodayForecast.tsx";
 import {useState} from "react";
 import TomorrowForecast from "../components/TomorrowForecast.tsx";
+import {Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, TooltipItem, CoreChartOptions} from 'chart.js';
+// @ts-ignore
+import {_DeepPartialObject} from "chart.js/dist/types/utils";
+import ChanceOfRain from "../components/ChanceOfRain.tsx";
 
 
 const todayDate = new Date();
 const formattedDate: string = moment(todayDate).format("ddd, D MMM");
 
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip);
 
 interface Props {
     isFetching: boolean;
     currentWeatherData?: WeatherData | undefined;
     currentPlace: string;
+    todayForecast: Array<WeatherData>;
+    tomorrowForecast: Array<WeatherData>;
+    isNight: boolean;
+    sunrise?: Date;
+    sunset?: Date;
+
 }
 
-export default function Home({currentPlace, currentWeatherData}: Props) {
+export default function Home({isFetching, currentPlace, currentWeatherData, todayForecast, tomorrowForecast, isNight, sunset, sunrise}: Props) {
     const [forecastSection, setForecastSection] = useState<"today" | "tomorrow">("today");
+    const forecast: WeatherData[] = forecastSection === "today" ? todayForecast: tomorrowForecast;
+
+    const chanceOfRain: number[]  = forecast.map((data: WeatherData) => data.values.cloudCover);
+    const times: string[] = forecast.map((data) => {
+        return `${moment(data.time).format('hA')}`;
+    });
+
+    const data = {
+        labels: times,
+        datasets: [
+            {
+                label: "Chance of Rain (%)",
+                data: chanceOfRain,
+                backgroundColor: '#fbbc04',
+                borderRadius: 5,
+                barThickness: 10,
+                borderSkipped: false,
+            },
+        ],
+    };
+
+    const options:  _DeepPartialObject<CoreChartOptions<"bar">> = {
+        responsive: true,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                callbacks: {
+                    label: (tooltipItem: TooltipItem<'bar'>) => `${tooltipItem.raw}% chance of rain`,
+                },
+            },
+        },
+        scales: {
+            x: {
+                grid: { display: false },
+            },
+            y: {
+                grid: { drawBorder: false },
+                beginAtZero: true,
+                max: 100,
+            },
+        },
+    };
+
+
     return (
         <BaseLayout>
-            <FrameLayout>
-                <Title/>
-                <CurrentWeather currentPlace={currentPlace} formattedDate={formattedDate} weatherData={currentWeatherData}/>
+            <FrameLayout isNight={isNight}>
+                <Title isNight={isNight}/>
+                <CurrentWeather currentPlace={currentPlace} formattedDate={formattedDate} weatherData={currentWeatherData}
+                    isNight={isNight} sunset={sunset} sunrise={sunrise}
+                />
                 <div className="">
-                    <ButtonSection forecastSection={forecastSection} setForecastSection={setForecastSection}/>
-                    {forecastSection === "today" ? <TodayForecast/> : <TomorrowForecast/>}
+                    <ButtonSection forecastSection={forecastSection} setForecastSection={setForecastSection} isNight={isNight}/>
+                    {isFetching && (<div className="py-6 flex items-center justify-center">
+                        <span className="${isNight ? 'text-white': 'text-appBackground' text-center">Loading...</span>
+                    </div>)}
+
+                    {forecastSection === "today" ? <TodayForecast forecast={todayForecast} isNight={isNight}/> : <TomorrowForecast forecast={tomorrowForecast} isNight={isNight}/>}
                 </div>
-                <div className="px-6 mt-5 flex flex-col gap-y-4">
-                    <h4 className="font-bold text-white">Chance of rain</h4>
-                    <div className="flex w-full">
-                        <div className="w-1/6 flex flex-col text-white font-medium text-xs gap-y-3">
-                            <span>sunny</span>
-                            <span>rainy</span>
-                            <span>heavy rain</span>
-                        </div>
-                        <div className="w-auto"></div>
-                    </div>
-                </div>
+                <ChanceOfRain data={data} options={options}/>
             </FrameLayout>
         </BaseLayout>
     )
