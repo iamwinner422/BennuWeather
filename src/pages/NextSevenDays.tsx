@@ -16,7 +16,7 @@ export default function NextSevenDays({isNight = false}: Props){
                     <Link to="/">
                         <i className="bi bi-chevron-left font-bold text-app "></i>
                     </Link>
-                    <h2 className="text-appBackground font-medium">Next <span className="font-bold">7 days</span></h2>
+                    <h2 className="text-appBackground font-medium">Next <span className="font-bold">4 days</span></h2>
                     <div className="bg-white shadow-xl rounded px-4 py-6 flex flex-col gap-y-5">
                         <div className="flex justify-between items-center">
                             <div className="flex gap-x-4 items-center">

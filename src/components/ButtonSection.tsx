@@ -22,7 +22,7 @@ export default function ButtonSection({forecastSection, setForecastSection, isNi
             </button>
             <Link to="/next-seven-days"
                 className="text-swatch_1 font-semibold text-sm flex items-center justify-center">
-                Next 7 Days
+                Next 4 Days
                 <i className="bi bi-chevron-right text-xs"></i>
             </Link>
         </div>

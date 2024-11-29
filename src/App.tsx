@@ -92,7 +92,7 @@ function App() {
                     todayForecast={todayForecast} tomorrowForecast={tomorrowForecast}
                     />}
                 />
-                <Route path="/next-seven-days" element={<NextSevenDays isNight={isNight}/>}/>
+                <Route path="/next-four-days" element={<NextSevenDays isNight={isNight}/>}/>
             </Routes>
         </BrowserRouter>
     )
