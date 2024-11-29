@@ -29,4 +29,74 @@ function roundTemperature(temperature: number) {
     return Math.round(temperature);
 }
 
+const weatherCodeMapping = {
+    // Ciel clair
+    1000: {
+        day: 'wi-day-sunny',
+        night: 'wi-night-clear',
+    },
+
+    // Partiellement nuageux
+    1100: {
+        day: 'wi-day-cloudy',
+        night: 'wi-night-alt-cloudy',
+    },
+
+    // Nuageux
+    1001: {
+        day: 'wi-cloudy',
+        night: 'wi-cloudy',
+    },
+
+    // Brume / Brouillard
+    4000: {
+        day: 'wi-fog',
+        night: 'wi-fog',
+    },
+
+    // Pluie légère
+    4001: {
+        day: 'wi-day-rain',
+        night: 'wi-night-alt-rain',
+    },
+
+    // Pluie modérée
+    4200: {
+        day: 'wi-day-rain-mix',
+        night: 'wi-night-alt-rain-mix',
+    },
+
+    // Pluie forte
+    4201: {
+        day: 'wi-day-rain-wind',
+        night: 'wi-night-alt-rain-wind',
+    },
+
+    // Neige légère
+    5001: {
+        day: 'wi-day-snow',
+        night: 'wi-night-alt-snow',
+    },
+
+    // Neige modérée
+    5600: {
+        day: 'wi-day-snow-wind',
+        night: 'wi-night-alt-snow',
+    }
+};
+
+const weatherIcons = {
+    1000: { day: "wi-day-sunny", night: "wi-night-clear" },
+    1100: { day: "wi-day-cloudy", night: "wi-night-alt-cloudy" },
+    1101: { day: "wi-cloud", night: "wi-cloud" },
+    4000: { day: "wi-day-rain", night: "wi-night-alt-rain" },
+    8000: { day: "wi-day-thunderstorm", night: "wi-night-alt-thunderstorm" },
+};
+
+function getWeatherIcon(weatherCode: number, isNight:boolean) {
+    const icon = weatherIcons[weatherCode];
+    return isNight ? icon.night : icon.day;
+}
+
+
 export {splitHourlyData, roundTemperature}
