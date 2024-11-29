@@ -36,7 +36,7 @@ function App() {
         await axios.get(`${nominatimApiURL}/reverse?format=json&lat=${lat}&lon=${long}&addressdetails=1`)
             .then((response) => {
                 const {address} = response.data;
-                const currentPlace_: string = address.city || address.village;
+                const currentPlace_: string = address.city || address.village + ', ' + address.country;
                 setCurrentPlace(currentPlace_);
             }).catch((error) => {
                 console.log(error)
