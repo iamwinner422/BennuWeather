@@ -30,13 +30,15 @@ interface Props {
 
 }
 
-export default function Home({isFetching, currentPlace, currentWeatherData, todayForecast, tomorrowForecast}: Props) {
+export default function Home({isFetching, currentPlace, currentWeatherData, todayForecast, tomorrowForecast, isNight, sunset, sunrise}: Props) {
     const [forecastSection, setForecastSection] = useState<"today" | "tomorrow">("today");
     return (
         <BaseLayout>
             <FrameLayout>
                 <Title/>
-                <CurrentWeather currentPlace={currentPlace} formattedDate={formattedDate} weatherData={currentWeatherData}/>
+                <CurrentWeather currentPlace={currentPlace} formattedDate={formattedDate} weatherData={currentWeatherData}
+                    isNight={isNight} sunset={sunset} sunrise={sunrise}
+                />
                 <div className="">
                     <ButtonSection forecastSection={forecastSection} setForecastSection={setForecastSection}/>
                     {isFetching && (<div className="py-6 flex items-center justify-center">

@@ -1,16 +1,20 @@
 import { WeatherData } from "../lib/types.ts";
 import {roundTemperature} from "../lib/utils.ts";
+import moment from "moment";
 
 interface Props {
     formattedDate: string;
     currentPlace: string;
     weatherData?: WeatherData | undefined;
+    isNight: boolean;
+    sunrise?: Date;
+    sunset?: Date;
 }
 
-export default function CurrentWeather({ formattedDate, currentPlace, weatherData }: Props) {
+export default function CurrentWeather({ formattedDate, currentPlace, weatherData, isNight, sunset, sunrise }: Props) {
     const formattedTemperature = (): string => {
         if (!weatherData || !weatherData.values || !weatherData.values.temperature) {
-            console.log("Pas de données météo valides :", weatherData);
+            //console.log("Pas de données météo valides :", weatherData);
             return "N/A";
         }
         return roundTemperature(weatherData.values.temperature).toString();
@@ -34,7 +38,7 @@ export default function CurrentWeather({ formattedDate, currentPlace, weatherDat
                 </div>
                 <span className="text-white text-xs">{currentPlace}</span>
                 <span className="text-white text-xs">
-                    Feels Like {roundTemperature(weatherData?.values?.temperatureApparent as number) || "N/A"} °C
+                    Feels Like {roundTemperature(weatherData?.values?.temperatureApparent as number) || "N/A"} °C • {isNight ? `Sunset: ${moment(sunset).format('HH:mm')}` : `Sunrise: ${moment(sunrise).format('HH:mm')}`}
                 </span>
             </div>
         </div>
