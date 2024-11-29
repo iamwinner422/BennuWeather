@@ -39,8 +39,13 @@ function getSunTimes(latitude: number, longitude: number) {
     };
 }
 
+interface WeatherIcon {
+    day: string;  // Nom ou URL de l'icône pour le jour
+    night: string;  // Nom ou URL de l'icône pour la nuit
+}
 
-const weatherIcons = {
+
+const weatherIcons: Record<number, WeatherIcon> = {
     1000: { day: "wi-day-sunny", night: "wi-night-clear" },
     1100: { day: "wi-day-cloudy", night: "wi-night-alt-cloudy" },
     1101: { day: "wi-cloud", night: "wi-cloud" },
@@ -49,7 +54,7 @@ const weatherIcons = {
 };
 
 function getWeatherIcon(weatherCode: number, isNight:boolean) {
-    const icon = weatherIcons[weatherCode];
+    const icon: WeatherIcon = weatherIcons[weatherCode];
     return isNight ? icon.night : icon.day;
 }
 
