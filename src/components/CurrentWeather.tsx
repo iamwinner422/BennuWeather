@@ -1,6 +1,9 @@
 import { WeatherData } from "../lib/types.ts";
 import {roundTemperature} from "../lib/utils.ts";
 import moment from "moment";
+import WeatherIcon from "./WeatherIcon.tsx";
+
+
 
 interface Props {
     formattedDate: string;
@@ -10,6 +13,7 @@ interface Props {
     sunrise?: Date;
     sunset?: Date;
 }
+
 
 export default function CurrentWeather({ formattedDate, currentPlace, weatherData, isNight, sunset, sunrise }: Props) {
     const formattedTemperature = (): string => {
@@ -24,7 +28,7 @@ export default function CurrentWeather({ formattedDate, currentPlace, weatherDat
         <div className="my-5">
             <div className="flex items-center gap-4 justify-center">
                 <div>
-                    <i className="wi wi-cloud text-swatch_1"></i>
+                    {weatherData?.values.weatherCode && <WeatherIcon weatherCode={weatherData?.values.weatherCode} isNight={isNight}/>}
                 </div>
                 <div className="flex flex-col">
                     <h3 className={`text-lg font-bold ${isNight ? 'text-white' : 'text-appBackground'}`}>Today</h3>

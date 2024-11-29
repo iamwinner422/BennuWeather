@@ -1,5 +1,7 @@
 import {WeatherData} from "./types.ts";
 import SunCalc from 'suncalc';
+
+
 function splitHourlyData(hourlyData: Array<WeatherData>) {
     const now = new Date();
     const today = now.toISOString().split("T")[0]; // Date d'aujourd'hui au format YYYY-MM-DD
@@ -30,7 +32,6 @@ function roundTemperature(temperature: number) {
 }
 
 
-
 function getSunTimes(latitude: number, longitude: number) {
     const times = SunCalc.getTimes(new Date(), latitude, longitude);
     return {
@@ -43,7 +44,6 @@ interface WeatherIcon {
     day: string;  // Nom ou URL de l'icône pour le jour
     night: string;  // Nom ou URL de l'icône pour la nuit
 }
-
 
 const weatherIcons: Record<number, WeatherIcon> = {
     1000: { day: "wi-day-sunny", night: "wi-night-clear" },
