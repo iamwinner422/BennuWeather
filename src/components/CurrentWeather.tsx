@@ -1,9 +1,10 @@
 
 interface Props {
-    formattedDate: string
+    formattedDate: string;
+    currentPlace: string;
 }
 
-export default function CurrentWeather({formattedDate}: Props){
+export default function CurrentWeather({formattedDate, currentPlace}: Props){
     return (
         <div className="my-5">
             <div className="flex items-center gap-4 justify-center">
@@ -20,7 +21,7 @@ export default function CurrentWeather({formattedDate}: Props){
                     <h2 className="text-white text-7xl">28</h2>
                     <span className="text-white text-lg">°C</span>
                 </div>
-                <span className="text-white text-xs">Lomé</span>
+                <span className="text-white text-xs">{currentPlace}</span>
                 <span className="text-white text-xs">Fill Like 32 • Sunset</span>
             </div>
         </div>

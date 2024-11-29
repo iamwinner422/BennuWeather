@@ -9,16 +9,14 @@ import axios from "axios";
 import {WeatherData} from "./lib/types.ts";
 
 
-
-
 const apiURL: string = import.meta.env.VITE_TOMORROW_API_URL;
 const apiKey: string = import.meta.env.VITE_TOMORROW_API_KEY;
 const nominatimApiURL: string = import.meta.env.VITE_NOMINATIM_API_URL;
 
 
-
 function App() {
     const [isFetching, setIsFetching] = useState<boolean>(true);
+    const [currentPlace, setCurrentPlace] = useState<string>("Lomé");
     const [currentWeatherData, setCurrentWeatherData] = useState<WeatherData | null>(null);
 
     const fetchRealTimeWeather = async (lat: number, long: number) => {
@@ -38,8 +36,8 @@ function App() {
         await axios.get(`${nominatimApiURL}/reverse?format=json&lat=${lat}&lon=${long}&addressdetails=1`)
             .then((response) => {
                 const {address} = response.data;
-                const currentPlace = address.city || address.village;
-                console.log("add", currentPlace);
+                const currentPlace_: string = address.city || address.village;
+                setCurrentPlace(currentPlace_);
             }).catch((error) => {
                 console.log(error)
             })
@@ -57,10 +55,12 @@ function App() {
             (error) => console.error("Error getting location:", error)
         );
     }, []);
+
+
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Home isFetching={isFetching} currentWeatherData={currentWeatherData}/>}/>
+                <Route path="/" element={<Home isFetching={isFetching} currentWeatherData={currentWeatherData} currentPlace={currentPlace}/>}/>
                 <Route path="/next-seven-days" element={<NextSevenDays/>}/>
             </Routes>
         </BrowserRouter>

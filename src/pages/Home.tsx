@@ -21,15 +21,16 @@ const formattedDate: string = moment(todayDate).format("ddd, D MMM");
 interface Props {
     isFetching: boolean;
     currentWeatherData: WeatherData | null;
+    currentPlace: string;
 }
 
-export default function Home({isFetching}: Props) {
+export default function Home({isFetching, currentPlace}: Props) {
     const [forecastSection, setForecastSection] = useState<"today" | "tomorrow">("today");
     return (
         <BaseLayout>
             <FrameLayout>
                 <Title/>
-                <CurrentWeather formattedDate={formattedDate}/>
+                <CurrentWeather currentPlace={currentPlace} formattedDate={formattedDate}/>
                 <div className="">
                     <ButtonSection forecastSection={forecastSection} setForecastSection={setForecastSection}/>
                     {forecastSection === "today" ? <TodayForecast/> : <TomorrowForecast/>}
