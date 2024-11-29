@@ -8,22 +8,21 @@ import FirstDayCard from "../components/FirstDayCard.tsx";
 
 interface Props {
     isFetching: boolean;
-    isNight: boolean;
     nextFourDaysForecast: WeatherData[];
 }
-export default function NextSevenDays({isFetching, isNight = false, nextFourDaysForecast}: Props){
+export default function NextSevenDays({isFetching, nextFourDaysForecast}: Props){
     console.log('isi', nextFourDaysForecast[0])
     const firstData: WeatherData = nextFourDaysForecast[0];
     return(
         <BaseLayout>
-            <FrameLayout isNight={isNight}>
-                <Title isNight={isNight}/>
+            <FrameLayout isNight={false}>
+                <Title isNight={false}/>
                 <div className="my-5 px-4 flex flex-col gap-y-4">
                     <Link to="/">
                         <i className="bi bi-chevron-left font-bold text-app "></i>
                     </Link>
                     <h2 className="text-appBackground font-medium">Next <span className="font-bold">4 days</span></h2>
-                    <FirstDayCard isNight={isNight} firstData={firstData} isFetching={isFetching}/>
+                    <FirstDayCard firstData={firstData} isFetching={isFetching}/>
                 </div>
             </FrameLayout>
         </BaseLayout>

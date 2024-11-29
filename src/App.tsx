@@ -95,7 +95,7 @@ function App() {
                     todayForecast={todayForecast} tomorrowForecast={tomorrowForecast}
                     />}
                 />
-                <Route path="/next-four-days" element={<NextSevenDays isNight={isNight} isFetching={isFetching}
+                <Route path="/next-four-days" element={<NextSevenDays isFetching={isFetching}
                     nextFourDaysForecast={nextFourDaysForecast}
                     />}
                 />
