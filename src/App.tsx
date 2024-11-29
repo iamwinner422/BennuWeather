@@ -7,6 +7,7 @@ import "./assets/weather-icons/css/weather-icons.min.css";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {WeatherData} from "./lib/types.ts";
+import {splitHourlyData} from "./lib/utils.ts";
 
 
 const apiURL: string = import.meta.env.VITE_TOMORROW_API_URL;
@@ -18,72 +19,58 @@ function App() {
     const [isFetching, setIsFetching] = useState<boolean>(true);
     const [currentPlace, setCurrentPlace] = useState<string>("--");
     const [currentWeatherData, setCurrentWeatherData] = useState<WeatherData | undefined>(undefined);
+    const [todayForecast, setTodayForecast] = useState<Array<WeatherData>>([]);
+    const [tomorrowForecast, setTomorrowForecast] = useState<Array<WeatherData>>([]);
 
     const fetchWeather = async (lat: number, long: number) => {
-        await axios.get(`${apiURL}/forecast?location=${lat},${long}&apikey=${apiKey}`, {
-            headers: {"Content-Type": "application/json"}
-        }).then((response) => {
-            //console.log('response', response.data.timelines);
-            const {hourly} = response.data.timelines;
+        try {
+            const response = await axios.get(
+                `${apiURL}/forecast?location=${lat},${long}&apikey=${apiKey}`,
+                { headers: { "Content-Type": "application/json" } }
+            );
+            const { hourly } = response.data.timelines;
             const { todayData, tomorrowData } = splitHourlyData(hourly);
-            console.log('today', todayData, 'tomorrow', tomorrowData)
-            setCurrentWeatherData(hourly[0]);
-        }).catch((error) => {
-            console.log('error', error);
-        }).finally(()=>{
+            setTodayForecast(todayData);
+            setTomorrowForecast(tomorrowData);
+            setCurrentWeatherData(hourly[0]); // Premier élément comme météo actuelle
+        } catch (error) {
+            console.error("Erreur lors de la récupération des données météo :", error);
+        } finally {
             setIsFetching(false);
-        })
+        }
     };
 
-    const geocodingReverse = async (lat: number, long: number)=> {
-        await axios.get(`${nominatimApiURL}/reverse?format=json&lat=${lat}&lon=${long}&addressdetails=1`)
-            .then((response) => {
-                const {address} = response.data;
-                const currentPlace_: string = address.city || address.village + ', ' + address.country;
-                setCurrentPlace(currentPlace_);
-                console.log("Place Response", currentPlace_)
-            }).catch((error) => {
-                console.log(error)
-            })
-    }
-
-    function splitHourlyData(hourlyData: Array<WeatherData>) {
-        const now = new Date();
-        const today = now.toISOString().split("T")[0]; // Date d'aujourd'hui au format YYYY-MM-DD
-        const currentHour = now.getHours(); // Heure actuelle
-
-        const todayData = hourlyData.filter((item) => {
-            const itemDate = item.time.split("T")[0]; // Date de l'élément au format YYYY-MM-DD
-            const itemHour = parseInt(item.time.split("T")[1].split(":")[0]); // Heure de l'élément
-            return itemDate === today && itemHour >= currentHour && itemHour <= 23 && itemHour % 2 === 0; //Par paire
-            // actuelle à 23h
-        });
-
-        const tomorrow = new Date(now);
-        tomorrow.setDate(tomorrow.getDate() + 1); // Date de demain
-        const tomorrowDate = tomorrow.toISOString().split("T")[0]; // Demain au format YYYY-MM-DD
-
-        const tomorrowData = hourlyData.filter((item) => {
-            const itemDate = item.time.split("T")[0]; // Date de l'élément
-            const itemHour = parseInt(item.time.split("T")[1].split(":")[0]); // Heure de l'élément
-            return itemDate === tomorrowDate && itemHour >= 0 && itemHour <= 23 && itemHour % 2 === 0; //Par paire
-        });
-
-        return { todayData, tomorrowData };
-    }
+    const geocodingReverse = async (lat: number, long: number) => {
+        try {
+            const response = await axios.get(
+                `${nominatimApiURL}/reverse?format=json&lat=${lat}&lon=${long}&addressdetails=1`
+            );
+            const { address } = response.data;
+            const currentPlace_ = `${address.city || address.village}, ${address.country}`;
+            setCurrentPlace(currentPlace_);
+        } catch (error) {
+            console.error("Erreur lors de la récupération de l'adresse :", error);
+        }
+    };
 
 
     useEffect(() => {
+        if (!navigator.geolocation) {
+            console.error("La géolocalisation n'est pas supportée par ce navigateur.");
+            setIsFetching(false);
+            return;
+        }
+
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
-                // Fetch weather data using latitude and longitude
-                console.log(latitude, longitude)
-                fetchWeather(latitude, longitude)
+                fetchWeather(latitude, longitude);
                 geocodingReverse(latitude, longitude);
-
             },
-            (error) => console.error("Error getting location:", error)
+            (error) => {
+                console.error("Erreur lors de la récupération de la localisation :", error);
+                setIsFetching(false);
+            }
         );
     }, []);
 
@@ -91,7 +78,11 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Home isFetching={isFetching} currentWeatherData={currentWeatherData} currentPlace={currentPlace}/>}/>
+                <Route path="/" element={<Home isFetching={isFetching}
+                    currentWeatherData={currentWeatherData} currentPlace={currentPlace}
+                    todayForecast={todayForecast} tomorrowForecast={tomorrowForecast}
+                    />}
+                />
                 <Route path="/next-seven-days" element={<NextSevenDays/>}/>
             </Routes>
         </BrowserRouter>

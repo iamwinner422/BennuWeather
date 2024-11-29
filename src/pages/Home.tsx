@@ -22,9 +22,12 @@ interface Props {
     isFetching: boolean;
     currentWeatherData?: WeatherData | undefined;
     currentPlace: string;
+    todayForecast: Array<WeatherData>;
+    tomorrowForecast: Array<WeatherData>;
+
 }
 
-export default function Home({currentPlace, currentWeatherData}: Props) {
+export default function Home({currentPlace, currentWeatherData, todayForecast, tomorrowForecast}: Props) {
     const [forecastSection, setForecastSection] = useState<"today" | "tomorrow">("today");
     return (
         <BaseLayout>
