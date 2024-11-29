@@ -20,7 +20,7 @@ const formattedDate: string = moment(todayDate).format("ddd, D MMM");
 
 interface Props {
     isFetching: boolean;
-    currentWeatherData: WeatherData | null;
+    currentWeatherData?: WeatherData | undefined;
     currentPlace: string;
 }
 
