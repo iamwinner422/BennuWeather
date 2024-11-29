@@ -34,23 +34,23 @@ export default function Home({isFetching, currentPlace, currentWeatherData, toda
     const [forecastSection, setForecastSection] = useState<"today" | "tomorrow">("today");
     return (
         <BaseLayout>
-            <FrameLayout>
-                <Title/>
+            <FrameLayout isNight={isNight}>
+                <Title isNight={isNight}/>
                 <CurrentWeather currentPlace={currentPlace} formattedDate={formattedDate} weatherData={currentWeatherData}
                     isNight={isNight} sunset={sunset} sunrise={sunrise}
                 />
                 <div className="">
-                    <ButtonSection forecastSection={forecastSection} setForecastSection={setForecastSection}/>
+                    <ButtonSection forecastSection={forecastSection} setForecastSection={setForecastSection} isNight={isNight}/>
                     {isFetching && (<div className="py-6 flex items-center justify-center">
                         <span className="text-white text-center">Loading...</span>
                     </div>)}
 
-                    {forecastSection === "today" ? <TodayForecast forecast={todayForecast}/> : <TomorrowForecast forecast={tomorrowForecast}/>}
+                    {forecastSection === "today" ? <TodayForecast forecast={todayForecast} isNight={isNight}/> : <TomorrowForecast forecast={tomorrowForecast} isNight={isNight}/>}
                 </div>
-                <div className="px-6 mt-5 flex flex-col gap-y-4">
-                    <h4 className="font-bold text-white">Chance of rain</h4>
+                <div className="px-6 flex flex-col gap-y-4">
+                    <h4 className="font-bold ${isNight ? 'text-white' : 'text-appBackground'}">Chance of rain</h4>
                     <div className="flex w-full">
-                        <div className="w-1/6 flex flex-col text-white font-medium text-xs gap-y-3">
+                        <div className="w-1/6 flex flex-col ${isNight ? 'text-white' : 'text-appBackground'} font-medium text-xs gap-y-3">
                             <span>sunny</span>
                             <span>rainy</span>
                             <span>heavy rain</span>
