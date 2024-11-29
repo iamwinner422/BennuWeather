@@ -40,8 +40,8 @@ export default function CurrentWeather({ formattedDate, currentPlace, weatherDat
                     <h2 className={`${isNight ? 'text-white' : 'text-appBackground'} text-7xl font-bold`}>{formattedTemperature()}</h2>
                     <span className={`${isNight ? 'text-white' : 'text-appBackground'} text-lg`}>°C</span>
                 </div>
-                <span className="${isNight ? 'text-white': 'text-appBackground'}` text-xs">{currentPlace}</span>
-                <span className="${isNight ? 'text-white': 'text-appBackground'}` text-xs">
+                <span className={`${isNight ? 'text-white': 'text-appBackground'} text-xs`}>{currentPlace}</span>
+                <span className={`${isNight ? 'text-white': 'text-appBackground'} text-xs`}>
                     Feels Like {roundTemperature(weatherData?.values?.temperatureApparent as number) || "N/A"} °C • {isNight ? `Sunset: ${moment(sunset).format('HH:mm')}` : `Sunrise: ${moment(sunrise).format('HH:mm')}`}
                 </span>
             </div>
