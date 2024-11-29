@@ -99,4 +99,4 @@ function getWeatherIcon(weatherCode: number, isNight:boolean) {
 }
 
 
-export {splitHourlyData, roundTemperature}
+export {splitHourlyData, roundTemperature, getWeatherIcon}
