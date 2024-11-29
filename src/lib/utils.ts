@@ -46,17 +46,100 @@ interface WeatherIcon {
 }
 
 const weatherIcons: Record<number, WeatherIcon> = {
-    1000: { day: "wi-day-sunny", night: "wi-night-clear" },
-    1100: { day: "wi-day-cloudy", night: "wi-night-alt-cloudy" },
-    1001: { day: "wi-cloud", night: "wi-cloud" },
-    1102: { day: "wi-day-cloudy-high", night: "wi-night-cloudy-high"},
-    4000: { day: 'wi-fog', night: 'wi-fog' },
-    4001: { day: "wi-day-rain", night: "wi-night-alt-rain" },
-    4200: { day: 'wi-day-rain-mix', night: 'wi-night-alt-rain-mix'},
-    4201: { day: 'wi-day-rain-wind', night: 'wi-night-alt-rain-wind'},
-    5001: { day: 'wi-day-snow', night: 'wi-night-alt-snow'},
-    5600: { day: 'wi-day-snow-wind', night: 'wi-night-alt-snow'},
-    8000: { day: "wi-day-thunderstorm", night: "wi-night-alt-thunderstorm" },
+    1000: {
+        day: "wi-day-sunny",
+        night: "wi-night-clear"
+    },
+    1100: {
+        day: "wi-day-sunny",
+        night: "wi-night-clear"
+    },
+
+    // Nuageux
+    1001: {
+        day: "wi-cloudy",
+        night: "wi-cloudy"
+    },
+    1101: {
+        day: "wi-day-cloudy",
+        night: "wi-night-alt-cloudy"
+    },
+    1102: {
+        day: "wi-day-cloudy",
+        night: "wi-night-alt-cloudy"
+    },
+
+    // Brouillard
+    2000: {
+        day: "wi-fog",
+        night: "wi-fog"
+    },
+    2100: {
+        day: "wi-day-fog",
+        night: "wi-night-fog"
+    },
+
+    // Pluie
+    4000: {
+        day: "wi-day-sprinkle",
+        night: "wi-night-alt-sprinkle"
+    },
+    4001: {
+        day: "wi-day-rain",
+        night: "wi-night-alt-rain"
+    },
+    4200: {
+        day: "wi-day-rain-mix",
+        night: "wi-night-alt-rain-mix"
+    },
+    4201: {
+        day: "wi-day-rain-wind",
+        night: "wi-night-alt-rain-wind"
+    },
+
+    // Neige
+    5000: {
+        day: "wi-day-snow",
+        night: "wi-night-alt-snow"
+    },
+    5001: {
+        day: "wi-day-snow",
+        night: "wi-night-alt-snow"
+    },
+    5100: {
+        day: "wi-day-snow",
+        night: "wi-night-alt-snow"
+    },
+    5101: {
+        day: "wi-day-snow-wind",
+        night: "wi-night-alt-snow-wind"
+    },
+
+    // Pluie verglaçante
+    6000: {
+        day: "wi-day-sleet",
+        night: "wi-night-alt-sleet"
+    },
+    6001: {
+        day: "wi-day-sleet",
+        night: "wi-night-alt-sleet"
+    },
+
+    // Grêle
+    7000: {
+        day: "wi-hail",
+        night: "wi-hail"
+    },
+    7101: {
+        day: "wi-hail",
+        night: "wi-hail"
+    },
+
+    // Orage
+    8000: {
+        day: "wi-day-thunderstorm",
+        night: "wi-night-alt-thunderstorm"
+    }
 };
 
 function getWeatherIcon(weatherCode: number, isNight:boolean) {
