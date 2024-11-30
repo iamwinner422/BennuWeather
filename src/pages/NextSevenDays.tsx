@@ -7,6 +7,7 @@ import FirstDayCard from "../components/FirstDayCard.tsx";
 import moment from "moment";
 import WeatherIcon from "../components/WeatherIcon.tsx";
 import {roundTemperature} from "../lib/utils.ts";
+import ProgressBar from "../components/ProgressBar.tsx";
 
 
 interface Props {
@@ -44,8 +45,8 @@ export default function NextSevenDays({isFetching, nextFourDaysForecast}: Props)
                                     <div>
                                         <span className="font-bold text-sm text-gray-400">{roundTemperature(data.values.temperatureMin as number)}°C</span>
                                     </div>
-                                    <div>
-
+                                    <div className="w-full">
+                                        <ProgressBar minTemp={data.values.temperatureMin as number} maxTemp={data.values.temperatureMax as number}/>
                                     </div>
                                     <div className="text-right">
                                         <span className="font-bold text-appBackground text-sm">{roundTemperature(data.values.temperatureMax as number)}°C</span>
