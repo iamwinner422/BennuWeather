@@ -11,8 +11,9 @@ interface Props {
     nextFourDaysForecast: WeatherData[];
 }
 export default function NextSevenDays({isFetching, nextFourDaysForecast}: Props){
-    console.log('isi', nextFourDaysForecast[0])
     const firstData: WeatherData = nextFourDaysForecast[0];
+    const otherData: WeatherData[] = nextFourDaysForecast.slice(1, nextFourDaysForecast.length);
+    console.log(otherData);
     return(
         <BaseLayout>
             <FrameLayout isNight={false}>

@@ -39,7 +39,7 @@ export default function Home({isFetching, currentPlace, currentWeatherData, toda
     const [forecastSection, setForecastSection] = useState<"today" | "tomorrow">("today");
     const forecast: WeatherData[] = forecastSection === "today" ? todayForecast: tomorrowForecast;
 
-    const chanceOfRain: number[]  = forecast.map((data: WeatherData) => data.values.precipitationProbability);
+    const chanceOfRain: number[] = forecast.map((data: WeatherData) => data.values.precipitationProbability);
     const times: string[] = forecast.map((data) => {
         return `${moment(data.time).format('hA')}`;
     });

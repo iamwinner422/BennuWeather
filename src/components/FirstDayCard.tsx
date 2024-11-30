@@ -20,10 +20,10 @@ export default function FirstDayCard({firstData, isFetching}: Props){
                 </div>
                 <div className="flex gap-x-2 items-center">
                                 <span className="text-appBackground text-sm font-bold">
-                                    {isFetching ? "--" : roundTemperature(firstData?.values.temperatureAvg as number)}°C
+                                    {isFetching ? "--" : roundTemperature(firstData?.values.temperatureMax as number)}°C
                                 </span>
                     <span
-                        className="text-gray-400 text-xs">{isFetching ? "--" : roundTemperature(firstData?.values.temperatureApparentAvg as number)}°C</span>
+                        className="text-gray-400 text-xs">{isFetching ? "--" : roundTemperature(firstData?.values.temperatureMin as number)}°C</span>
                 </div>
             </div>
             <div className="flex flex-col gap-y-2">
