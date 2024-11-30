@@ -1,50 +1,64 @@
-# React + TypeScript + Vite
+# Bennu Weather
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Setup Guide
 
-Currently, two official plugins are available:
+Welcome! This guide will help you download, set up, and run this project on your computer. Follow these steps carefully, and you’ll be ready to go in no time.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+### 📥 Step 1: Download the Project
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Click on the green **Code** button at the top right of this page.
+2. Select **Download ZIP**.
+3. Once the ZIP file is downloaded, extract (unzip) it to a folder on your computer.
 
-- Configure the top-level `parserOptions` property like this:
+---
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### 🛠️ Step 2: Install Necessary Software
+
+Before running the project, make sure you have the following software installed on your computer:
+
+1. **Node.js**
+    - Go to the [Node.js website](https://nodejs.org/) and download the latest version for your operating system.
+    - Follow the installation steps provided on the website.
+
+2. **A Code Editor (Optional)**
+    - Install a code editor like [Visual Studio Code](https://code.visualstudio.com/) to view and edit the project files.
+
+---
+
+### 📂 Step 3: Open the Project Folder
+
+1. Open the folder where you extracted the project.
+2. Right-click inside the folder and select **Open in Terminal** (on Windows) or **Open in Terminal** (on macOS/Linux).
+
+   If you’re using Visual Studio Code:
+    - Open Visual Studio Code.
+    - Click **File** > **Open Folder**, and select the project folder.
+    - Open the terminal in Visual Studio Code by pressing `Ctrl + ~` (Windows) or `Cmd + ~` (Mac).
+
+---
+
+### 📦 Step 4: Install the Project Dependencies
+
+Dependencies are extra tools the project needs to run. To install them:
+
+1. Type the following command in the terminal and press **Enter**:
+   ```bash
+   npm install
+
+
+### ▶️ Step 5: Run the Project
+
+1. To start the project, type the following command in the terminal and press Enter:
+```bash
+    npm start
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Once the project starts, you’ll see a message in the terminal showing that it’s running successfully.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+3.Open your web browser and go to the following address:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+    http://localhost:5173
 ```

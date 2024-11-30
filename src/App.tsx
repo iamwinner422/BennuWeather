@@ -67,17 +67,30 @@ function App() {
             return;
         }
 
+
+        const fetchAndUpdateData = (latitude: number, longitude: number) => {
+            const { sunrise_, sunset_ } = getSunTimes(latitude, longitude);
+            const now = new Date();
+            setIsNight(now < sunrise_ || now > sunset_);
+            setSunset(sunset_);
+            setSunrise(sunrise_);
+            fetchWeather(latitude, longitude);
+            geocodingReverse(latitude, longitude);
+        };
+
+
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
 
-                const { sunrise_, sunset_ } = getSunTimes(latitude, longitude);
-                const now = new Date();
-                setIsNight(now < sunrise_ || now > sunset_);
-                setSunset(sunset_);
-                setSunrise(sunrise_);
-                fetchWeather(latitude, longitude);
-                geocodingReverse(latitude, longitude);
+                fetchAndUpdateData(latitude, longitude);
+
+                const intervalId = setInterval(() => {
+                    console.log("Fetching updated weather data...");
+                    fetchAndUpdateData(latitude, longitude);
+                }, 1800000); // 30 minutes
+
+                return () => clearInterval(intervalId);
             },
             (error) => {
                 console.error("Erreur lors de la récupération de la localisation :", error);
@@ -85,6 +98,7 @@ function App() {
             }
         );
     }, []);
+
 
 
     return (

@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.tsx";
 import {Link} from "react-router-dom";
 import {WeatherData} from "../lib/types.ts";
 import FirstDayCard from "../components/FirstDayCard.tsx";
+import WeatherRow from "../components/WeatherRow.tsx";
 
 
 interface Props {
@@ -11,8 +12,9 @@ interface Props {
     nextFourDaysForecast: WeatherData[];
 }
 export default function NextSevenDays({isFetching, nextFourDaysForecast}: Props){
-    console.log('isi', nextFourDaysForecast[0])
     const firstData: WeatherData = nextFourDaysForecast[0];
+    const otherData: WeatherData[] = nextFourDaysForecast.slice(1, nextFourDaysForecast.length);
+    console.log(otherData);
     return(
         <BaseLayout>
             <FrameLayout isNight={false}>
@@ -23,6 +25,13 @@ export default function NextSevenDays({isFetching, nextFourDaysForecast}: Props)
                     </Link>
                     <h2 className="text-appBackground font-medium">Next <span className="font-bold">4 days</span></h2>
                     <FirstDayCard firstData={firstData} isFetching={isFetching}/>
+                    <div className="mt-4 px-1 flex flex-col gap-y-6">
+                        {otherData.map((data: WeatherData, index) => (
+                            <div className="w-full" key={index}>
+                                <WeatherRow data={data} />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </FrameLayout>
         </BaseLayout>
