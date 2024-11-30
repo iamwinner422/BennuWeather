@@ -10,7 +10,7 @@ interface Props {
 }
 export default function FirstDayCard({firstData, isFetching}: Props){
     return (
-        <div className="bg-white shadow-xl rounded px-4 py-6 flex flex-col gap-y-5">
+        <div className="bg-white shadow-xl rounded-lg px-4 py-6 flex flex-col gap-y-5">
             <div className="flex justify-between items-center">
                 <div className="flex gap-x-4 items-center">
                     <h5 className="text-sm text-appBackground font-bold">{isFetching ? "--" : moment(firstData?.time).format('dddd')}</h5>
