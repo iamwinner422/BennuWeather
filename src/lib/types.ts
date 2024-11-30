@@ -28,5 +28,7 @@ export interface WeatherData {
         humidityAvg?: number | undefined;
         visibilityAvg?: number | undefined;
         uvIndexAvg: number | undefined;
+        temperatureMin?: number | undefined;
+        temperatureMax?: number | undefined;
     }
 }
