@@ -31,7 +31,7 @@ export default function NextSevenDays({isFetching, nextFourDaysForecast}: Props)
                     <div className="mt-4 px-1 flex flex-col gap-y-6">
                         {otherData.map((data: WeatherData, index) => (
                             <div className="w-full" key={index}>
-                                <div className="grid grid-cols-5 grid-rows-1 w-full">
+                                <div className="grid grid-cols-5 grid-rows-1 w-full items-center">
                                     <div className="flex flex-col gap-y-1">
                                         <span className="uppercase font-bold text-xs">{moment(data.time).format('ddd')}</span>
                                         <div className="flex gap-x-1" style={{fontSize: "8.5px"}}>
@@ -46,7 +46,7 @@ export default function NextSevenDays({isFetching, nextFourDaysForecast}: Props)
                                         <span className="font-bold text-sm text-gray-400">{roundTemperature(data.values.temperatureMin as number)}°C</span>
                                     </div>
                                     <div className="w-full">
-                                        <ProgressBar minTemp={data.values.temperatureMin as number} maxTemp={data.values.temperatureMax as number}/>
+                                        <ProgressBar maxTemp={data.values.temperatureMax as number}/>
                                     </div>
                                     <div className="text-right">
                                         <span className="font-bold text-appBackground text-sm">{roundTemperature(data.values.temperatureMax as number)}°C</span>

@@ -1,5 +1,4 @@
 interface Props {
-    minTemp: number;
     maxTemp: number;
 }
 
