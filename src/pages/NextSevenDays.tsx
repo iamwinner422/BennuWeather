@@ -4,10 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.tsx";
 import {Link} from "react-router-dom";
 import {WeatherData} from "../lib/types.ts";
 import FirstDayCard from "../components/FirstDayCard.tsx";
-import moment from "moment";
-import WeatherIcon from "../components/WeatherIcon.tsx";
-import {roundTemperature} from "../lib/utils.ts";
-import ProgressBar from "../components/ProgressBar.tsx";
+import WeatherRow from "../components/WeatherRow.tsx";
 
 
 interface Props {
@@ -31,27 +28,7 @@ export default function NextSevenDays({isFetching, nextFourDaysForecast}: Props)
                     <div className="mt-4 px-1 flex flex-col gap-y-6">
                         {otherData.map((data: WeatherData, index) => (
                             <div className="w-full" key={index}>
-                                <div className="grid grid-cols-5 grid-rows-1 w-full items-center">
-                                    <div className="flex flex-col gap-y-1">
-                                        <span className="uppercase font-bold text-xs">{moment(data.time).format('ddd')}</span>
-                                        <div className="flex gap-x-1" style={{fontSize: "8.5px"}}>
-                                            <i className="bi bi-droplet-fill text-swatch_1"></i>
-                                            <span>{data.values.humidityAvg}%</span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <WeatherIcon isNight={false} weatherCode={data.values.weatherCodeMax as number} classes="text-swatch_1 text-lg"/>
-                                    </div>
-                                    <div>
-                                        <span className="font-bold text-sm text-gray-400">{roundTemperature(data.values.temperatureMin as number)}°C</span>
-                                    </div>
-                                    <div className="w-full">
-                                        <ProgressBar maxTemp={data.values.temperatureMax as number}/>
-                                    </div>
-                                    <div className="text-right">
-                                        <span className="font-bold text-appBackground text-sm">{roundTemperature(data.values.temperatureMax as number)}°C</span>
-                                    </div>
-                                </div>
+                                <WeatherRow data={data} />
                             </div>
                         ))}
                     </div>
