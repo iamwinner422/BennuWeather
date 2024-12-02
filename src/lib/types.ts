@@ -32,3 +32,8 @@ export interface WeatherData {
         temperatureMax?: number | undefined;
     }
 }
+
+export interface WeatherIcon {
+    day: string;  // Nom ou URL de l'icône pour le jour
+    night: string;  // Nom ou URL de l'icône pour la nuit
+}

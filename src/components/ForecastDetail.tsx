@@ -1,6 +1,6 @@
 import {WeatherData} from "../lib/types.ts";
 import moment from "moment";
-import {roundTemperature} from "../lib/utils.ts";
+import {roundValues} from "../lib/utils.ts";
 import WeatherIcon from "./WeatherIcon.tsx";
 
 
@@ -16,7 +16,7 @@ export default function ForecastDetail({data, isNight}: Props) {
                 <WeatherIcon isNight={isNight} weatherCode={data.values.weatherCode} classes="text-white group-hover:text-swatch_1 text-center"/>
             </div>
             <div style={{fontSize: "12px"}} className="flex items-center justify-center group-hover:text-swatch_2 text-white font-bold">
-                {roundTemperature(data.values.temperature)} <span style={{fontSize: "9px"}} className="text-xs ml-1 text-center ">°C</span>
+                {roundValues(data.values.temperature)} <span style={{fontSize: "9px"}} className="text-xs ml-1 text-center ">°C</span>
             </div>
         </>
     )
