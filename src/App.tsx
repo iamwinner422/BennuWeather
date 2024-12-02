@@ -1,7 +1,7 @@
 import './App.css'
 import {Route, Routes, BrowserRouter} from "react-router-dom";
 import Home from "./pages/Home.tsx";
-import NextSevenDays from "./pages/NextSevenDays.tsx";
+import NextDays from "./pages/NextDays.tsx";
 import "bootstrap-icons/font/bootstrap-icons.css"
 import "./assets/weather-icons/css/weather-icons.min.css";
 import {useEffect, useState} from "react";
@@ -24,7 +24,7 @@ function App() {
     const [tomorrowForecast, setTomorrowForecast] = useState<Array<WeatherData>>([]);
     const [sunrise, setSunrise] = useState<Date>();
     const [sunset, setSunset] = useState<Date>();
-    const [nextFourDaysForecast, setNextFourDaysForecast] = useState<Array<WeatherData>>([]);
+    const [nextDaysForecast, setNextDaysForecast] = useState<Array<WeatherData>>([]);
 
     const fetchWeather = async (lat: number, long: number) => {
         try {
@@ -37,7 +37,7 @@ function App() {
             setTodayForecast(todayData);
             setTomorrowForecast(tomorrowData);
             setCurrentWeatherData(hourly[0]); // Premier élément comme météo actuelle
-            setNextFourDaysForecast(daily.slice(2, daily.length));
+            setNextDaysForecast(daily.slice(2, daily.length));
 
         } catch (error) {
             console.error("Erreur lors de la récupération des données météo :", error);
@@ -106,11 +106,11 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home isFetching={isFetching} isNight={isNight} sunrise={sunrise}
                     currentWeatherData={currentWeatherData} currentPlace={currentPlace} sunset={sunset}
-                    todayForecast={todayForecast} tomorrowForecast={tomorrowForecast}
+                    todayForecast={todayForecast} tomorrowForecast={tomorrowForecast} nextDaysForecastLength={nextDaysForecast.length}
                     />}
                 />
-                <Route path="/next-four-days" element={<NextSevenDays isFetching={isFetching}
-                    nextFourDaysForecast={nextFourDaysForecast}
+                <Route path="/next-days" element={<NextDays isFetching={isFetching}
+                    nextFourDaysForecast={nextDaysForecast}
                     />}
                 />
             </Routes>

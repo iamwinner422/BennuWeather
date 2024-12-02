@@ -11,7 +11,7 @@ interface Props {
     isFetching: boolean;
     nextFourDaysForecast: WeatherData[];
 }
-export default function NextSevenDays({isFetching, nextFourDaysForecast}: Props){
+export default function NextDays({isFetching, nextFourDaysForecast}: Props){
     const firstData: WeatherData = nextFourDaysForecast[0];
     const otherData: WeatherData[] = nextFourDaysForecast.slice(1, nextFourDaysForecast.length);
     console.log(otherData);
