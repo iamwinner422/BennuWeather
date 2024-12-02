@@ -32,10 +32,11 @@ interface Props {
     isNight: boolean;
     sunrise?: Date;
     sunset?: Date;
+    nextDaysForecastLength: number;
 
 }
 
-export default function Home({isFetching, currentPlace, currentWeatherData, todayForecast, tomorrowForecast, isNight, sunset, sunrise}: Props) {
+export default function Home({isFetching, currentPlace, currentWeatherData, todayForecast, tomorrowForecast, isNight, sunset, sunrise, nextDaysForecastLength}: Props) {
     const [forecastSection, setForecastSection] = useState<"today" | "tomorrow">("today");
     const forecast: WeatherData[] = forecastSection === "today" ? todayForecast: tomorrowForecast;
 
@@ -89,7 +90,9 @@ export default function Home({isFetching, currentPlace, currentWeatherData, toda
                     isNight={isNight} sunset={sunset} sunrise={sunrise}
                 />
                 <div className="">
-                    <ButtonSection forecastSection={forecastSection} setForecastSection={setForecastSection} isNight={isNight}/>
+                    <ButtonSection forecastSection={forecastSection} setForecastSection={setForecastSection} isNight={isNight}
+                        nextDaysForecastLength={nextDaysForecastLength}
+                    />
                     {isFetching && (<div className="py-6 flex items-center justify-center">
                         <span className={`${isNight ? 'text-white': 'text-appBackground'} text-center`}>Loading...</span>
                     </div>)}
