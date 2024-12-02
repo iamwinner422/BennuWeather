@@ -1,4 +1,4 @@
-import {WeatherData} from "./types.ts";
+import {WeatherData, WeatherIcon} from "./types.ts";
 import SunCalc from 'suncalc';
 
 
@@ -27,8 +27,8 @@ function splitHourlyData(hourlyData: Array<WeatherData>) {
     return { todayData, tomorrowData };
 }
 
-function roundTemperature(temperature: number) {
-    return Math.round(temperature);
+function roundValues(value: number) {
+    return Math.round(value);
 }
 
 
@@ -40,10 +40,6 @@ function getSunTimes(latitude: number, longitude: number) {
     };
 }
 
-interface WeatherIcon {
-    day: string;  // Nom ou URL de l'icône pour le jour
-    night: string;  // Nom ou URL de l'icône pour la nuit
-}
 
 const weatherIcons: Record<number, WeatherIcon> = {
     1000: {
@@ -148,4 +144,4 @@ function getWeatherIcon(weatherCode: number, isNight:boolean) {
 }
 
 
-export {splitHourlyData, roundTemperature, getWeatherIcon, getSunTimes}
+export {splitHourlyData, roundValues, getWeatherIcon, getSunTimes}

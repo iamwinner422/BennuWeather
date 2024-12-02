@@ -1,6 +1,6 @@
 import moment from "moment/moment";
 import WeatherIcon from "./WeatherIcon.tsx";
-import {roundTemperature} from "../lib/utils.ts";
+import {roundValues} from "../lib/utils.ts";
 import ProgressBar from "./ProgressBar.tsx";
 import {WeatherData} from "../lib/types.ts";
 
@@ -15,7 +15,7 @@ export default function WeatherRow({data}: Props){
                 <span className="uppercase font-bold text-xs">{moment(data.time).format('ddd')}</span>
                 <div className="flex gap-x-1" style={{fontSize: "8.5px"}}>
                     <i className="bi bi-droplet-fill text-swatch_1"></i>
-                    <span>{data.values.humidityAvg}%</span>
+                    <span>{roundValues(data.values.humidityAvg as number)}%</span>
                 </div>
             </div>
             <div>
@@ -24,14 +24,14 @@ export default function WeatherRow({data}: Props){
             </div>
             <div>
                 <span
-                    className="font-bold text-sm text-gray-400">{roundTemperature(data.values.temperatureMin as number)}°C</span>
+                    className="font-bold text-sm text-gray-400">{roundValues(data.values.temperatureMin as number)}°C</span>
             </div>
             <div className="w-full">
                 <ProgressBar maxTemp={data.values.temperatureMax as number}/>
             </div>
             <div className="text-right">
                 <span
-                    className="font-bold text-appBackground text-sm">{roundTemperature(data.values.temperatureMax as number)}°C</span>
+                    className="font-bold text-appBackground text-sm">{roundValues(data.values.temperatureMax as number)}°C</span>
             </div>
         </div>
     )
