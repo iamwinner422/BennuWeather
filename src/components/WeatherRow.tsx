@@ -15,7 +15,7 @@ export default function WeatherRow({data}: Props){
                 <span className="uppercase font-bold text-xs">{moment(data.time).format('ddd')}</span>
                 <div className="flex gap-x-1" style={{fontSize: "8.5px"}}>
                     <i className="bi bi-droplet-fill text-swatch_1"></i>
-                    <span>{data.values.humidityAvg}%</span>
+                    <span>{roundValues(data.values.humidityAvg as number)}%</span>
                 </div>
             </div>
             <div>

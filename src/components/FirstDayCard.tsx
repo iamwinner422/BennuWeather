@@ -32,7 +32,7 @@ export default function FirstDayCard({firstData, isFetching}: Props){
                         <div className="w-full flex justify-between items-center">
                             <span style={{fontSize: "12px"}} className="font-bold text-appBackground">Wind</span>
                             <span style={{fontSize: "10px"}} className="text-gray-400">
-                                            {isFetching ? '--' : firstData?.values.windSpeedAvg} m/h
+                                            {isFetching ? '--' : roundValues(firstData?.values.windSpeedAvg as number)} m/h
                                         </span>
                         </div>
                     </div>
@@ -40,7 +40,7 @@ export default function FirstDayCard({firstData, isFetching}: Props){
                         <div className="w-full flex justify-between items-center">
                             <span style={{fontSize: "12px"}} className="font-bold text-appBackground">Humidity</span>
                             <span style={{fontSize: "10px"}} className="text-gray-400">
-                                            {isFetching ? '--' : firstData?.values.humidityAvg} %
+                                            {isFetching ? '--' : roundValues(firstData?.values.humidityAvg as number)} %
                                         </span>
                         </div>
                     </div>
@@ -51,7 +51,7 @@ export default function FirstDayCard({firstData, isFetching}: Props){
                                         <span style={{fontSize: "12px"}}
                                             className="font-bold text-appBackground">Visibility</span>
                             <span style={{fontSize: "10px"}} className="text-gray-400">
-                                            {isFetching ? '--' : firstData?.values.visibilityAvg} km
+                                            {isFetching ? '--' : roundValues(firstData?.values.visibilityAvg as number)} km
                                         </span>
                         </div>
                     </div>
