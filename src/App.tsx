@@ -51,8 +51,9 @@ function App() {
             const response = await axios.get(
                 `${nominatimApiURL}/reverse?format=json&lat=${lat}&lon=${long}&addressdetails=1`
             );
-            const { address } = response.data;
-            const currentPlace_ = `${address.city || address.village}, ${address.country}`;
+            //const { address } = response.data;
+            //const currentPlace_ = `${address.city || address.village}, ${address.country}`;
+            const currentPlace_ = response.data.display_name;
             setCurrentPlace(currentPlace_);
         } catch (error) {
             console.error("Erreur lors de la récupération de l'adresse :", error);
