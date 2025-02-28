@@ -52,7 +52,7 @@ Dependencies are extra tools the project needs to run. To install them:
 
 1. To start the project, type the following command in the terminal and press Enter:
 ```bash
-    npm start
+    npm run dev
 ```
 
 2. Once the project starts, you’ll see a message in the terminal showing that it’s running successfully.
